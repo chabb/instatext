@@ -1,4 +1,4 @@
-export interface Message {
+export interface ITMessage {
     recipients: string[];
     message: string;
     timestamp: number;

@@ -1,3 +1,13 @@
 // firebase
 
-{
+// messages { recipients: { 'x': true }... etc }
+
+
+// a message is sent
+
+
+//messages/from/<userId> => get all messages
+
+// i select somebody
+//messages/to
+

@@ -11,3 +11,7 @@ export const Chat: React.FC<any> = ({messages}) => {
         </div>)}
     </div>
 };
+
+
+const MessageFrom = (props) => <div></div>;
+const MessageTo = (props) => <div></div>;

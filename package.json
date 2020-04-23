@@ -29,6 +29,7 @@
     "typescript": "^3.7.5",
     "unique-names-generator": "^4.2.0"
   },
+  "homepag": "http://chabb.github.io/instatext",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

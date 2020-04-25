@@ -1,5 +1,5 @@
 import React from 'react'
-import {Select, Tag, Form, Input} from "antd";
+import {Select, Tag, Form, Input, Button} from "antd";
 import { PhoneOutlined, ContactsOutlined, TeamOutlined} from '@ant-design/icons';
 
 const { Option } = Select;
@@ -54,6 +54,11 @@ export const NewMessage: React.FC<any> = () => {
             </Form.Item>
             <Form.Item  validateTrigger={['onBlur']} label='Message' name='message' rules={[{ required: true }]}>
                 <Input.TextArea />
+            </Form.Item>
+            <Form.Item>
+                <Button type="primary" htmlType="submit">
+                    Envoyer
+                </Button>
             </Form.Item>
         </Form>
 

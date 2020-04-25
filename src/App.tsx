@@ -10,6 +10,7 @@ import {
     useParams
 } from 'react-router-dom';
 import {Inbox} from "./inbox/inbox";
+import {NewMessage} from "./widgets/new_message";
 const { Header, Footer, Sider, Content } = Layout;
 const Home = () => <span> Home</span>;
 const Contact = () => <span> Home</span>;
@@ -22,12 +23,8 @@ function App() {
                 <Sider
                     breakpoint="lg"
                     collapsedWidth="0"
-                    onBreakpoint={broken => {
-                        console.log(broken);
-                    }}
-                    onCollapse={(collapsed, type) => {
-                        console.log(collapsed, type);
-                    }}
+                    onBreakpoint={broken => console.log(broken)}
+                    onCollapse={(collapsed, type) => console.log(collapsed, type)}
                 >
                     <div className="logo">Instatext</div>
                     <div className='main-nav'>
@@ -37,7 +34,7 @@ function App() {
                         </Button>
                         <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
                             <Menu.Item key="1">
-                                <Link to='/inboc'>
+                                <Link to='/inbox'>
                                     <UserOutlined />
                                     <span className="nav-text">Inbox</span>
                                 </Link>
@@ -81,7 +78,7 @@ function App() {
                 onOk={() => setModalVisible(false)}
                 onCancel={() => setModalVisible(false)}
             >
-                <p>Form todo</p>
+                <NewMessage/>
             </Modal>
         </Router>
     );

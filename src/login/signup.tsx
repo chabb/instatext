@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
 import {Link, useHistory} from "react-router-dom";
 import {SignUpLink} from "./signin";
@@ -19,6 +19,13 @@ export const SignIn:React.FC<any> = () => {
     const firebase = useContext(FirebaseContext);
     const history = useHistory();
     const [errorMessage, setErrorMessage] = useState(null);
+    const isMounted = useRef(false);
+    useEffect(() => {
+        isMounted.current = true;
+        return () => {
+            isMounted.current = false;
+        }
+    });
 
     const onFinish = values => {
         const {email, password} = values;
@@ -30,6 +37,7 @@ export const SignIn:React.FC<any> = () => {
                     console.log('no user');
                 } else {
                     if (user.user!.emailVerified) {
+                        firebase!.currentUser = user.user;
                         history.push('/');
                     } else {
                         history.push('/email');
@@ -40,7 +48,7 @@ export const SignIn:React.FC<any> = () => {
                 setErrorMessage(e.message);
             }
         }).finally(() => {
-            setIsLoading(false);
+            isMounted.current && setIsLoading(false);
         });
     };
 

@@ -49,9 +49,9 @@ function Body() {
     const isLoginZone = (location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/email');
 
     const firebase = useContext(FirebaseContext);
-    const [sessionLoaded, setSessionLoaded] = useState(firebase!.sessionInitialized.getValue());
+    const [sessionLoaded, setSessionLoaded] = useState(false);
     // why-did-i-render
-    console.log('RENDERING BODY', firebase, '>', location);
+    console.log('RENDERING BODY', firebase!.currentUser, '>', location);
 
 
     useEffect(() => {
@@ -65,8 +65,7 @@ function Body() {
     },[]);
 
 
-
-    return hasSession(sessionLoaded, firebase) ?  (
+    return hasSession(sessionLoaded, firebase) ? (
         <div className='app'>
             {isLoginZone ?
                 <div className='logger'>

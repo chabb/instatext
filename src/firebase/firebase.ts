@@ -7,15 +7,15 @@ import {BehaviorSubject, Subject} from "rxjs";
 
 interface User {
     uid: string,
-    emailVerified: string,
-    email: string
+    emailVerified: boolean,
+    email: string | null;
 }
 
 export class Firebase {
 
     public auth: firebase.auth.Auth;
     private db: firebase.firestore.Firestore;
-    public currentUser!: User | null;// = localStorage.getItem('authUser') !== null ? JSON.parse(localStorage.getItem('authUser')!) : null;
+    public currentUser: User | null = localStorage.getItem('authUser') !== null ? JSON.parse(localStorage.getItem('authUser')!) : null;
     public sessionInitialized = new BehaviorSubject(false);
 
     constructor() {
@@ -34,9 +34,15 @@ export class Firebase {
 
     doCreateUserWithEmailAndPassword = (email, password) =>
         this.auth.createUserWithEmailAndPassword(email, password);
-    doSignInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password);
-    doSignOut = () => this.auth.signOut();
+    doSignInWithEmailAndPassword = (email, password) => {
+        this.sessionInitialized.next(false);
+        return this.auth.signInWithEmailAndPassword(email, password);
+    };
+    doSignOut = () => {
+        this.sessionInitialized.next(false);
+        this.currentUser = null;
+        this.auth.signOut();
+    };
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
     doPasswordUpdate = password => {
         if (this.auth.currentUser) {
@@ -53,6 +59,7 @@ export class Firebase {
     // when a user has signed up
     onAuthUserListener = (next, fallback) =>
         this.auth.onAuthStateChanged(authUser => {
+            console.log('find new user', authUser);
             if (authUser) {
                 this.getUser(authUser.uid).get().then((doc) => {
                     const dbUser = doc.data();

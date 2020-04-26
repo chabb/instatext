@@ -1,0 +1,31 @@
+@import '../mixins';
+
+.logger {
+  height: 100vh;
+
+  .email {
+    flex-basis: 60%;
+    .flex(column)
+  }
+  .flex-centered-container(column);
+  .header {
+    display: flex;
+    font-size: 2rem;
+    align-items: flex-end;
+    .flex-container-sized();
+  }
+  .body {
+    .flex(row);
+    .flex-grow-shrink-basis(2, 1, 0);
+    align-items: center;
+  }
+  .icon {
+    margin:10px;
+    .flex-grow-shrink-basis(1, 1, 0);
+    .flex-centered-container();
+  }
+  .message {
+    .flex(column);
+    .flex-grow-shrink-basis(2, 1, 0)
+  }
+}

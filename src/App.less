@@ -2,7 +2,12 @@
 @import './mixins';
 
 #root {
-  .ant-layout {
+  height: 100vh;
+  > .ant-spin {
+    margin: auto;
+  }
+  .flex(column);
+  .ant-layout, .app {
     height: 100vh;
   }
 }

@@ -162,7 +162,7 @@ function PrivateRoute({ children, ...rest }) {
         <Route
             {...rest}
             render={({location}) =>
-                firebase!.currentUser && firebase!.currentUser.emailVerified ? (
+                firebase!.currentUser && firebase!.currentUser!.emailVerified ? (
                         children
                     ) :
                     <Redirect

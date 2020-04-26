@@ -12,12 +12,16 @@ export const EmailVerification = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if (firebase && firebase.currentUser && firebase.currentUser.emailVerified) {
+        if (!firebase || !firebase.currentUser) {
+            history.push('/signup');
+            return;
+        } else if (firebase.currentUser.emailVerified) {
             history.push('/home');
         }
     }, []);
 
-    return <div className="email">
+    // can be wrapped in a component
+    return firebase!.currentUser && <div className="email">
         <div className="header">
             Verify you are human to start using Instatext
         </div>

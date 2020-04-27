@@ -7,6 +7,7 @@ import {
     Switch,
     Route,
     Link,
+    NavLink,
     useParams, useLocation, Redirect
 } from 'react-router-dom';
 import {Inbox} from "./inbox/inbox";
@@ -16,13 +17,12 @@ import Firebase from "./firebase/firebase";
 import {SignIn} from "./login/signup";
 import {SignUp} from "./login/signin";
 import {EmailVerification} from "./login/email";
+import {Contact} from "./contacts/contact";
+import {NewContact} from "./widgets/new_contact";
 
 
 const { Header, Footer, Sider, Content } = Layout;
 const Home = () => <span> Home</span>;
-const Contact = () => <span> Home</span>;
-
-
 
 
 const fb = new Firebase();
@@ -42,17 +42,31 @@ function App() {
 
 const hasSession = (sessionLoaded, firebase) => sessionLoaded || !!firebase!.currentUser;
 
+const getApp = (pathname) => {
+    switch (pathname) {
+        case '/contact': {
+            return { title:'Add new contact', item: ['2'], modal:  <NewContact/>};
+        }
+        default:
+        case '/inbox': {
+            return { title:'Add new message', item: ['1'], modal:  <NewMessage/>};
+        }
+    }
+}
 function Body() {
 
     const [modalVisible, setModalVisible] = useState(false);
     const location = useLocation();
+    const [currentApp, setCurrentApp] = useState<any>(getApp(location.pathname));
     const isLoginZone = (location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/email');
-
     const firebase = useContext(FirebaseContext);
     const [sessionLoaded, setSessionLoaded] = useState(false);
     // why-did-i-render
-    console.log('RENDERING BODY', firebase!.currentUser, '>', location);
-
+    // remember that useEffect is not called when the element is mounted
+    useEffect(() => {
+        console.log('>>>>>>>>>>>>>>>>>>', location.pathname);
+        setCurrentApp(getApp(location.pathname));
+    }, [location.pathname]);
 
     useEffect(() => {
         const s = firebase!.sessionInitialized.subscribe((v) => {
@@ -93,20 +107,22 @@ function Body() {
                         <div className='main-nav'>
                             <Button onClick={() => setModalVisible(true)}
                                     className='add-message' type="primary" shape="round" icon={<PlusOutlined />}>
-                                Add new message
+                                { currentApp.title }
                             </Button>
-                            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                                <Menu.Item key="1">
-                                    <Link to='/inbox'>
+                            <Menu
+                                selectedKeys={currentApp.item}
+                                theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                                <Menu.Item  key="1">
+                                    <NavLink to='/inbox'>
                                         <UserOutlined />
                                         <span className="nav-text">Inbox</span>
-                                    </Link>
+                                    </NavLink>
                                 </Menu.Item>
                                 <Menu.Item key="2">
-                                    <Link to='/contact'>
+                                    <NavLink to='/contact'>
                                         <VideoCameraOutlined />
                                         <span className="nav-text">Contacts</span>
-                                    </Link>
+                                    </NavLink>
                                 </Menu.Item>
                             </Menu>
                         </div>
@@ -137,12 +153,12 @@ function Body() {
                     </Layout>
                 </Layout>}
             <Modal
-                title="Send a new message"
+                title={currentApp.title}
                 visible={modalVisible}
                 onOk={() => setModalVisible(false)}
                 onCancel={() => setModalVisible(false)}
             >
-                <NewMessage/>
+                {currentApp.modal}
             </Modal>
         </div>) : <Spin size="large" tip="Loading..."/>
 }

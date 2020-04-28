@@ -4,6 +4,7 @@ import { PhoneOutlined, ContactsOutlined, TeamOutlined} from '@ant-design/icons'
 import {ModalProps} from "../constants";
 import {DataContext} from "../PrivateZone";
 import {ITContact} from "../contacts/contact-table-definition";
+import FirebaseContext from "../firebase/context";
 
 const { Option } = Select;
 
@@ -36,6 +37,7 @@ const options = contacts => contacts.reduce((acc, ct: ITContact & {id: string, k
 
 export const NewMessage: React.FC<ModalProps> = ({onFinish}) => {
     const [contacts, setContacts] = useState<any[]>([] as any[]);
+    const fb = useContext(FirebaseContext);
     const data = useContext(DataContext);
     useEffect(() => {
         const subscription = data.contacts.subscribe((contacts) => {
@@ -46,7 +48,9 @@ export const NewMessage: React.FC<ModalProps> = ({onFinish}) => {
 
     return (
     <>
-        <Form onFinish={c => onFinish()}>
+        <Form onFinish={({message,recipients}) => {
+            fb!.addMessage(recipients[0], message).then(a => console.log(a));
+        }}>
             <Form.Item
                 validateTrigger={['onBlur']}
                 label="Recipients"

@@ -1,4 +1,6 @@
 export enum Collection {
     USERS = 'users',
-    CONTACT = 'contact'
+    CONTACT = 'contact',
+    CHATROOM = 'chatroom',
+    MESSAGES = 'messages'
 }

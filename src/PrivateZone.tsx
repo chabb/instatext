@@ -40,7 +40,7 @@ export const PrivateZone = () => {
     return <DataContext.Provider value={ctx}>
         <_PrivateZone/>
     </DataContext.Provider>
-}
+};
 
 
 
@@ -118,8 +118,7 @@ const _PrivateZone = () => {
             {currentApp.modal}
         </Modal>
     </Layout>)
-}
-
+};
 
 
 // A wrapper for <Route> that redirects to the login

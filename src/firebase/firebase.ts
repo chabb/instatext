@@ -91,6 +91,34 @@ export class Firebase {
     addContactToCurrentUser = (contact: ITContact) => {
         return this.addContactToUser(this.auth.currentUser!.uid, contact);
     };
+    addMessage = (toPhoneNumber: string, message) => {
+
+        // fetch the chatroom, if it does notexist, creates it
+        const chat = this.db.collection(Collection.USERS)
+            .doc(this.currentUser!.uid)
+            .collection(Collection.CHATROOM)
+            .doc(toPhoneNumber);
+        return chat.get().then((d) => {
+            console.log('C', d.exists);
+                if (d.exists) {
+                    return chat.collection(Collection.MESSAGES).doc().set({
+                        message: message,
+                        to: toPhoneNumber,
+                        from: 'from'
+                    })
+                } else {
+                   return chat.set({contacts: toPhoneNumber}).then(() => {
+                       return chat.collection(Collection.MESSAGES).doc().set({
+                           message: message,
+                           to: toPhoneNumber,
+                           from: 'from'
+                       })
+                   })
+                }
+            })
+
+
+    };
     checkContact = (phoneNumber) => {
         const userUid = this.auth.currentUser!.uid;
         return this.db.collection(Collection.USERS).doc(userUid).collection(Collection.CONTACT)

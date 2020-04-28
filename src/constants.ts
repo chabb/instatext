@@ -4,6 +4,8 @@ export interface ITMessage {
     timestamp: number;
 }
 
-
+export interface ModalProps {
+    onFinish: () => void;
+}
 
 // DB -> a users

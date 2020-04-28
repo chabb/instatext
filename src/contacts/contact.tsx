@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Table, Input,  Modal, Button} from "antd";
 import {columns, generateFakeData} from "./contact-table-definition";
 import {NewContact} from "../widgets/new_contact";
 import { PlusOutlined } from '@ant-design/icons';
+import FirebaseContext from "../firebase/context";
 
 
 const { Search } = Input;
 export const Contact = () => {
     const [selectedRow, setSelectedRow] = useState<any>(null);
     const [modalVisible, setModalVisible] = useState(false);
+    const fb = useContext(FirebaseContext);
 
     const [data, setData] = useState(generateFakeData(10));
-    useEffect(() => { }, []); // potentially load there
+
     return (
         <div className='contact'>
             <Search

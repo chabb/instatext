@@ -4,6 +4,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import {Collection} from "./db";
 import {BehaviorSubject, Subject} from "rxjs";
+import {ITContact} from "../contacts/contact-table-definition";
 
 interface User {
     uid: string,
@@ -57,8 +58,9 @@ export class Firebase {
         }
     };
     // when a user has signed up
-    onAuthUserListener = (next, fallback) =>
-        this.auth.onAuthStateChanged(authUser => {
+    onAuthUserListener = (next, fallback) => {
+        console.log('0-00');
+        return this.auth.onAuthStateChanged(authUser => {
             console.log('find new user', authUser);
             if (authUser) {
                 this.getUser(authUser.uid).get().then((doc) => {
@@ -78,10 +80,34 @@ export class Firebase {
                 this.sessionInitialized.next(true);
                 fallback();
             }
+        }, (e) => {
+            console.log(e);
         });
+    };
     // DB
     addUser = (user:{uid: string, email:string, emailVerified: boolean}) => {
         return this.db.collection(Collection.USERS).doc(user.uid).set(user);
+    };
+    addContactToCurrentUser = (contact: ITContact) => {
+        return this.addContactToUser(this.auth.currentUser!.uid, contact);
+    };
+    checkContact = (phoneNumber) => {
+        const userUid = this.auth.currentUser!.uid;
+        return this.db.collection(Collection.USERS).doc(userUid).collection(Collection.CONTACT)
+            .doc(phoneNumber);
+    };
+    checkEmail = (email) => {
+
+    };
+    getUserContact = () => {
+        return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CONTACT);
+    };
+    addContactToUser = (userUid: string, contact: ITContact) => {
+        return this.db.collection(Collection.USERS).doc(userUid).collection(Collection.CONTACT)
+            .doc(contact.phoneNumber).set(contact).then(function(d) {
+            console.log("Document successfully written!");
+            return d;
+        }).catch((e) => { console.log(e); return Promise.reject(e);  });
     };
     getUser = (uid: string) => {
         return this.db.collection('users').doc(uid);

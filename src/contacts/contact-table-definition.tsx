@@ -6,7 +6,7 @@ import randomTimeStamp from 'random-timestamps';
 
 const formatTime = timeFormat("%B %d, %Y");
 
-interface ITContact {
+export interface ITContact {
     createdAt: number,
     contact: string,
     phoneNumber: string,

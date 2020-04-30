@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "instatext-27374"
+    "dev": "instatext-27374",
+    "staging": "instatext-prod"
   }
 }

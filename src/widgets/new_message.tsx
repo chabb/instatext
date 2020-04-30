@@ -1,10 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Select, Form, Input, Button} from "antd";
+import {Select, Form, Input, Button, notification} from "antd";
 import { PhoneOutlined, ContactsOutlined, TeamOutlined} from '@ant-design/icons';
 import {ModalProps} from "../constants";
 import {DataContext} from "../PrivateZone";
 import {ITContact} from "../contacts/contact-table-definition";
 import FirebaseContext from "../firebase/context";
+import {useContacts} from "../firebase/hook";
+
 
 const { Option } = Select;
 
@@ -36,20 +38,36 @@ const options = contacts => contacts.reduce((acc, ct: ITContact & {id: string, k
 // we build an inverted index of the contacts
 
 export const NewMessage: React.FC<ModalProps> = ({onFinish}) => {
-    const [contacts, setContacts] = useState<any[]>([] as any[]);
+    const contacts = useContacts(options);
     const fb = useContext(FirebaseContext);
-    const data = useContext(DataContext);
-    useEffect(() => {
-        const subscription = data.contacts.subscribe((contacts) => {
-            setContacts(options(contacts));
-        });
-        return () => subscription.unsubscribe();
-    }, []);
+
+    setTimeout(() => notification.success({message: 'Message has been sent'}), 1000);
 
     return (
     <>
         <Form onFinish={({message,recipients}) => {
-            fb!.addMessage(recipients[0], message).then(a => console.log(a));
+
+            // expose an handler to parent instead
+            // move this thing to RxJS
+            fb!.sendSMSMessage('+19145590987', recipients[0], message)
+                .then(
+                (m) => {
+                    console.log('sent message succesfully');
+                    return fb!.addMessageToDb(recipients[0], message, m.id, m.status).then(() => {
+                        console.log('sent ms success', m);
+                        notification.success({message: 'Message has been sent'});
+                        return m;
+                    }, e => {
+                        console.error('sent ms fail', e);
+                        notification.error({message:'Message could not be saved', description: e});
+                        return Promise.reject(e);
+                    })
+                },
+                (e) => {
+                    console.log('not sent ms', e);
+                    notification.error({message:'Message could not be sent', description: e});
+                    return Promise.reject(e);
+                }).then( () => {console.log('success')}, (e) => {console.log('failure', e)})
         }}>
             <Form.Item
                 validateTrigger={['onBlur']}
@@ -77,7 +95,6 @@ export const NewMessage: React.FC<ModalProps> = ({onFinish}) => {
                 </Button>
             </Form.Item>
         </Form>
-
     </>)
 };
 

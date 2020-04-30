@@ -1,0 +1,15 @@
+#SECRET TO FUNCTIONS
+
+firebase functions:config:set someservice.key="THE API KEY" someservice.id="THE CLIENT ID"
+
+#Check if firestore is closed to request?
+
+# additional security
+# https://stackoverflow.com/questions/37482366/is-it-safe-to-expose-firebase-apikey-to-the-public
+
+
+# firebase use
+
+
+firebase deploy -P staging
+firebase deploy -P production

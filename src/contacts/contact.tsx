@@ -4,15 +4,13 @@ import {columns, generateFakeData} from "./contact-table-definition";
 import {NewContact} from "../widgets/new_contact";
 import { PlusOutlined } from '@ant-design/icons';
 import FirebaseContext from "../firebase/context";
+import {useContacts} from "../firebase/hook";
 
 
 const { Search } = Input;
 export const Contact = () => {
     const [selectedRow, setSelectedRow] = useState<any>(null);
-    const [modalVisible, setModalVisible] = useState(false);
-    const fb = useContext(FirebaseContext);
-
-    const [data, setData] = useState(generateFakeData(10));
+    const contacts = useContacts();
 
     return (
         <div className='contact'>
@@ -27,7 +25,7 @@ export const Contact = () => {
                            setSelectedRow(record);
                        },
                    })}
-                   dataSource={data}
+                   dataSource={contacts}
                    onChange={() => {}} />
         </div>);
 }

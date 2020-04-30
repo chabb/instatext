@@ -2,7 +2,7 @@ import {Button, Layout, Modal, Menu } from "antd";
 import {Link, NavLink, Redirect, Route, Switch, useLocation} from "react-router-dom";
 import {Inbox} from "./inbox/inbox";
 import {Contact} from "./contacts/contact";
-import React, {useContext, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusOutlined } from '@ant-design/icons';
 import {NewContact} from "./widgets/new_contact";
 import {NewMessage} from "./widgets/new_message";
@@ -11,17 +11,7 @@ import {Data} from "./firebase/data-context";
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const getApp = (pathname) => {
-    switch (pathname) {
-        case '/contact': {
-            return { title:'Add new contact', item: ['2'], modal:  <NewContact onFinish={() => {}}/>};
-        }
-        default:
-        case '/inbox': {
-            return { title:'Add new message', item: ['1'], modal:  <NewMessage onFinish={() => {}}/>};
-        }
-    }
-};
+
 
 export const DataContext = React.createContext<Data>(null as unknown as Data);
 
@@ -47,11 +37,25 @@ export const PrivateZone = () => {
 const _PrivateZone = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const location = useLocation();
+    const getApp = useCallback((pathname) => {
+        switch (pathname) {
+            case '/contact': {
+                return { title:'Add new contact', item: ['2'], modal:  <NewContact onFinish={() => setModalVisible(false)}/>};
+            }
+            default:
+            case '/inbox': {
+                return { title:'Add new message', item: ['1'], modal:  <NewMessage onFinish={() => setModalVisible(false)}/>};
+            }
+        }
+    }, [setModalVisible]);
+
     const [currentApp, setCurrentApp] = useState<any>(getApp(location.pathname));
     useEffect(() => {
         console.log('>>>>>>>>>>>>>>>>>>', location.pathname);
         setCurrentApp(getApp(location.pathname));
     }, [location.pathname]);
+
+
 
     return  (
     <Layout>

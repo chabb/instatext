@@ -2,9 +2,12 @@ import {config} from './config';
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/functions";
 import {Collection} from "./db";
 import {BehaviorSubject, Subject} from "rxjs";
 import {ITContact} from "../contacts/contact-table-definition";
+import {SendMessageResponse} from "../../functions/src";
+import {MessageStatus} from "twilio/lib/rest/api/v2010/account/message";
 
 interface User {
     uid: string,
@@ -30,8 +33,21 @@ export class Firebase {
         }, () => {
             this.currentUser = null;
             localStorage.setItem('authUser', JSON.stringify(null));
-        })
+        });
     }
+
+    sendSMSMessage = (from: string, to: string, message: string) => {
+        const addMessage = firebase.functions().httpsCallable('sendMessage');
+        return addMessage({from, to, message}).then((result: firebase.functions.HttpsCallableResult) => {
+            const answer = result.data as SendMessageResponse;
+            console.log('success', result);
+            return answer;
+        }, (e) => {
+            console.warn(e);
+            return Promise.reject(e);
+        });
+    };
+
 
     doCreateUserWithEmailAndPassword = (email, password) =>
         this.auth.createUserWithEmailAndPassword(email, password);
@@ -91,33 +107,31 @@ export class Firebase {
     addContactToCurrentUser = (contact: ITContact) => {
         return this.addContactToUser(this.auth.currentUser!.uid, contact);
     };
-    addMessage = (toPhoneNumber: string, message) => {
-
+    addMessageToDb = (toPhoneNumber: string, message: string, sid: string, status: MessageStatus) => {
+        console.log('storing db', toPhoneNumber, message, sid);
         // fetch the chatroom, if it does notexist, creates it
         const chat = this.db.collection(Collection.USERS)
             .doc(this.currentUser!.uid)
             .collection(Collection.CHATROOM)
             .doc(toPhoneNumber);
+
+        const saveMessage = () => chat.collection(Collection.MESSAGES).doc(sid).set({
+            message,
+            to: toPhoneNumber,
+            from: 'from',
+            status
+        });
+
         return chat.get().then((d) => {
-            console.log('C', d.exists);
+            console.log('Collection exists', d.exists);
                 if (d.exists) {
-                    return chat.collection(Collection.MESSAGES).doc().set({
-                        message: message,
-                        to: toPhoneNumber,
-                        from: 'from'
-                    })
+                    return saveMessage();
                 } else {
                    return chat.set({contacts: toPhoneNumber}).then(() => {
-                       return chat.collection(Collection.MESSAGES).doc().set({
-                           message: message,
-                           to: toPhoneNumber,
-                           from: 'from'
-                       })
+                       return saveMessage();
                    })
                 }
-            })
-
-
+            });
     };
     checkContact = (phoneNumber) => {
         const userUid = this.auth.currentUser!.uid;

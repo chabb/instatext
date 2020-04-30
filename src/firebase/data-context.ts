@@ -19,8 +19,8 @@ export class Data {
             const contacts = [] as any[];
             querySnapshot.forEach(q => {
                 contacts.push({...q.data(), key: q.data().phoneNumber, id: q.data().phoneNumber});
-                console.log(contacts);
             });
+            console.log('GET CONTACTS', contacts);
             this.contacts.next(contacts);
         })
     }

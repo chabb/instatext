@@ -1,9 +1,9 @@
 import React, {useContext} from 'react'
-import {Select, Form, Input, Button} from "antd";
+import {Select, Form, Input, Button, notification} from "antd";
 import { PhoneOutlined, ContactsOutlined, TeamOutlined} from '@ant-design/icons';
 import {ModalProps} from "../constants";
 import FirebaseContext from "../firebase/context";
-import {useForm} from "antd/lib/form/Form";
+
 
 
 
@@ -11,9 +11,6 @@ import {useForm} from "antd/lib/form/Form";
 
 export const NewContact: React.FC<ModalProps> = ({onFinish}) => {
     const fb = useContext(FirebaseContext);
-
-    const form = useForm();
-    console.log('FB', fb);
 
     return (
         <>
@@ -34,7 +31,15 @@ export const NewContact: React.FC<ModalProps> = ({onFinish}) => {
                 onFinish={({phoneNumber, contact}) => {
                 const ts = new Date();
                 console.log(phoneNumber, ts, contact);
-                fb!.addContactToCurrentUser({phoneNumber, contact, createdAt: ts.getTime()});
+                fb!.addContactToCurrentUser({phoneNumber, contact, createdAt: ts.getTime()})
+                    .then(() => {
+                        console.log('tres bien');
+                        notification.success({message:'Contact successfully created', description:''})
+                        onFinish();
+                    }, (e) => {
+                        console.log('tres mauvais', e);
+                        notification.error({message:'User could not be created', description: e})
+                    })
             }}>
                 <Form.Item
                     validateTrigger={['onBlur']}

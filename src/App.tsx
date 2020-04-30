@@ -16,6 +16,8 @@ import {EmailVerification} from "./login/email";
 import {PrivateZone} from "./PrivateZone";
 
 
+
+
 const fb = new Firebase();
 
 (window as any).d = fb;

@@ -5,7 +5,7 @@ import {Contact} from "./contacts/contact";
 import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusOutlined } from '@ant-design/icons';
 import {addContactFlow, NewContact} from "./widgets/new_contact";
-import {NewMessage} from "./widgets/new_message";
+import {NewMessage, sendMessageFlow} from "./widgets/new_message";
 import FirebaseContext from "./firebase/context";
 import {Data} from "./firebase/data-context";
 
@@ -138,8 +138,10 @@ const _PrivateZone = () => {
             onOk={() => {
                switch (currentApp.id) {
                    case FORM_ID.MESSAGE: {
-                       /* TODO */
-                       break
+                      form.validateFields().then(() => {
+                          sendMessageFlow(fb, form);
+                       });
+                       break;
                    }
                    case FORM_ID.CONTACT: {
                        form.validateFields().then(() => {

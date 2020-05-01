@@ -47,25 +47,7 @@ export const NewMessage: React.FC<ModalProps> = ({onFinish, form}) => {
             onFinish={({message,recipients}) => {
             // expose an handler to parent instead
             // move this thing to RxJS
-            fb!.sendSMSMessage('+19145590987', recipients[0], message)
-                .then(
-                (m) => {
-                    console.log('sent message succesfully');
-                    return fb!.addMessageToDb(recipients[0], message, m.id, m.status).then(() => {
-                        console.log('sent ms success', m);
-                        notification.success({message: 'Message has been sent'});
-                        return m;
-                    }, e => {
-                        console.error('sent ms fail', e);
-                        notification.error({message:'Message could not be saved', description: e});
-                        return Promise.reject(e);
-                    })
-                },
-                (e) => {
-                    console.log('not sent ms', e);
-                    notification.error({message:'Message could not be sent', description: e});
-                    return Promise.reject(e);
-                }).then( () => {console.log('success')}, (e) => {console.log('failure', e)})
+
         }}>
             <Form.Item
                 validateTrigger={['onBlur']}
@@ -104,3 +86,26 @@ const getIcon = type => {
 // we can send to a contact, a group, or a phone number
 // we'll get an array of
 
+export const sendMessageFlow = (fb, form): Promise<any> => {
+    const {recipients, message } = fb.getFieldsValue();
+
+    return fb!.sendSMSMessage('+19145590987', recipients[0], message)
+        .then(
+            (m) => {
+                console.log('sent message succesfully');
+                return fb!.addMessageToDb(recipients[0], message, m.id, m.status).then(() => {
+                    console.log('sent ms success', m);
+                    notification.success({message: 'Message has been sent'});
+                    return m;
+                }, e => {
+                    console.error('sent ms fail', e);
+                    notification.error({message:'Message could not be saved', description: e});
+                    return Promise.reject(e);
+                })
+            },
+            (e) => {
+                console.log('not sent ms', e);
+                notification.error({message:'Message could not be sent', description: e});
+                return Promise.reject(e);
+            }).then( () => {console.log('success')}, (e) => {console.log('failure', e)})
+};

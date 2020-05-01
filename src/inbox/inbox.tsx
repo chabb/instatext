@@ -2,12 +2,11 @@ import React, {useContext, useEffect, useState} from 'react'
 import {Table, Input, Drawer} from "antd";
 import {columns, generateFakeData} from "./message-table-definition";
 import FirebaseContext from "../firebase/context";
-import {ITContact} from "../contacts/contact-table-definition";
 
 const { Search } = Input;
 
 export const Inbox = () => {
-    const fb = useContext(FirebaseContext);
+    //const fb = useContext(FirebaseContext);
     const [isDrawerVisible, setDrawerVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState<any>(null);
     const [data, setData] = useState(generateFakeData(10));

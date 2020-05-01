@@ -39,7 +39,6 @@ const options = contacts => contacts.reduce((acc, ct: ITContact & {id: string, k
 
 export const NewMessage: React.FC<ModalProps> = ({onFinish, form}) => {
     const contacts = useContacts(options);
-    const fb = useContext(FirebaseContext);
 
     return (
     <>
@@ -87,13 +86,13 @@ const getIcon = type => {
 // we'll get an array of
 
 export const sendMessageFlow = (fb, form): Promise<any> => {
-    const {recipients, message } = fb.getFieldsValue();
+    const {recipients, message } = form.getFieldsValue();
 
     return fb!.sendSMSMessage('+19145590987', recipients[0], message)
         .then(
             (m) => {
                 console.log('sent message succesfully');
-                return fb!.addMessageToDb(recipients[0], message, m.id, m.status).then(() => {
+                return fb!.addMessageToDb(m.from, recipients[0], message, m.id, m.status).then(() => {
                     console.log('sent ms success', m);
                     notification.success({message: 'Message has been sent'});
                     return m;

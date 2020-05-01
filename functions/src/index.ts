@@ -24,6 +24,7 @@ exports.useWildcard = functions.firestore
 
 
 exports.sendMessage = functions.https.onCall(({to, from, message}, context): Promise<SendMessageResponse> => {
+    console.log('start send message');
     const sid = functions.config().twilio.sid;
     const token = functions.config().twilio.token;
     if (!context.auth! || !context.auth!.uid) {
@@ -39,6 +40,7 @@ exports.sendMessage = functions.https.onCall(({to, from, message}, context): Pro
         to: to,
         from: from
     };
+    console.log('sending');
     return client.messages.create(textContent)
         .then((m: MessageInstance) => ({
                 from:m.from,

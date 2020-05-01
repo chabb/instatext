@@ -12,15 +12,12 @@ export class Data {
             console.log('FIXME !!!!!! Data callled two time');
             return Data.instance;
         }
-
         Data.instance = this;
-
         this.fb.getUserContact().onSnapshot((querySnapshot) => {
             const contacts = [] as any[];
             querySnapshot.forEach(q => {
                 contacts.push({...q.data(), key: q.data().phoneNumber, id: q.data().phoneNumber});
             });
-            console.log('GET CONTACTS', contacts);
             this.contacts.next(contacts);
         })
     }

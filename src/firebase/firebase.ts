@@ -107,7 +107,7 @@ export class Firebase {
     addContactToCurrentUser = (contact: ITContact) => {
         return this.addContactToUser(this.auth.currentUser!.uid, contact);
     };
-    addMessageToDb = (toPhoneNumber: string, message: string, sid: string, status: MessageStatus) => {
+    addMessageToDb = (from: string, toPhoneNumber: string, message: string, sid: string, status: MessageStatus) => {
         console.log('storing db', toPhoneNumber, message, sid);
         // fetch the chatroom, if it does notexist, creates it
         const chat = this.db.collection(Collection.USERS)
@@ -118,7 +118,7 @@ export class Firebase {
         const saveMessage = () => chat.collection(Collection.MESSAGES).doc(sid).set({
             message,
             to: toPhoneNumber,
-            from: 'from',
+            from,
             status
         });
 
@@ -146,7 +146,7 @@ export class Firebase {
     };
     addContactToUser = (userUid: string, contact: ITContact) => {
         return this.db.collection(Collection.USERS).doc(userUid).collection(Collection.CONTACT)
-            .doc(contact.phoneNumber).set(contact).then(function(d) {
+            .doc(contact.phoneNumber).set(contact).then((d) => {
             console.log("Document successfully written!");
             return d;
         }).catch((e) => { console.log(e); return Promise.reject(e);  });

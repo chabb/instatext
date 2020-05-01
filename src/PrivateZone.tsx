@@ -133,20 +133,12 @@ const _PrivateZone = () => {
             visible={modalVisible}
             forceRender={true}
             okText={currentApp.id === FORM_ID.CONTACT ? 'Create contact' : 'Send message'}
-            okButtonProps={{disabled: form.isFieldsTouched()}}
+            okButtonProps={ {}/* TODO */}
 
             onOk={() => {
-                console.log(form);
                switch (currentApp.id) {
                    case FORM_ID.MESSAGE: {
-                       form.validateFields().then(() => {
-                           addContactFlow(fb, form, () => {
-                               form.resetFields();
-                               setModalVisible(false);
-                           },)
-                       }, (i) => {
-                           console.log('fa', i);
-                       });
+                       /* TODO */
                        break
                    }
                    case FORM_ID.CONTACT: {

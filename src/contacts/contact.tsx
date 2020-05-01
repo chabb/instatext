@@ -1,16 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {Table, Input,  Modal, Button} from "antd";
-import {columns, generateFakeData} from "./contact-table-definition";
-import {NewContact} from "../widgets/new_contact";
+import React, {useContext, useState} from 'react'
+import {Table, Input, Drawer, Form} from "antd";
+import {columns } from "./contact-table-definition";
+
 import { PlusOutlined } from '@ant-design/icons';
 import FirebaseContext from "../firebase/context";
 import {useContacts} from "../firebase/hook";
+import {NewMessage} from "../widgets/new_message";
+import {NewContact} from "../widgets/new_contact";
+
+
 
 
 const { Search } = Input;
 export const Contact = () => {
     const [selectedRow, setSelectedRow] = useState<any>(null);
+    const fb = useContext(FirebaseContext);
+    const [isDrawerVisible, setDrawerVisible] = useState(false);
     const contacts = useContacts();
+    const [form] = Form.useForm();
 
     return (
         <div className='contact'>
@@ -23,10 +30,31 @@ export const Contact = () => {
                    onRow={(record) => ({
                        onClick: () => {
                            setSelectedRow(record);
+                           // this will trigger two rendering, but it's ok for now
+                           setTimeout(() => {
+                               form.resetFields();
+                               setDrawerVisible(true);
+                           }, 0);
                        },
                    })}
                    dataSource={contacts}
                    onChange={() => {}} />
+
+            <Drawer
+                title={`Edit contact ${selectedRow && selectedRow.contact}`}
+                placement="right"
+                closable={false}
+                width={'40%'}
+                onClose={() => setDrawerVisible(false)}
+                visible={isDrawerVisible}
+            >
+                <NewContact
+                    form={form}
+                    onFinish={() => {
+                        console.log('done');
+                    }}
+                    phoneNumber={selectedRow ? selectedRow.phoneNumber : null} contact={selectedRow ? selectedRow.contact: ''} />
+            </Drawer>
         </div>);
 }
 

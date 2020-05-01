@@ -9,7 +9,7 @@ import {ParseError, parsePhoneNumber, parsePhoneNumberFromString} from 'libphone
 
 // we build an inverted index of the contacts
 
-export const NewContact: React.FC<ModalProps> = ({onFinish, form}) => {
+export const NewContact: React.FC<ModalProps  & {contact?: string, phoneNumber?: string}> = ({onFinish, form, phoneNumber, contact}) => {
     const fb = useContext(FirebaseContext);
 
     return (
@@ -17,8 +17,9 @@ export const NewContact: React.FC<ModalProps> = ({onFinish, form}) => {
             <Form
                 onValuesChange={(valueChange, allValues) => { }}
                 name={'CONTACT'}
+                initialValues={{contact, phoneNumber}}
                 form={form}
-                onFinish={({phoneNumber, contact}) => {}}>
+                onFinish={() => {}}>
                 <Form.Item
                     validateTrigger={['onBlur']}
                     label="Contact"
@@ -45,17 +46,18 @@ export const NewContact: React.FC<ModalProps> = ({onFinish, form}) => {
                                             if (error instanceof ParseError) {
                                                 // Not a phone number, non-existent country, etc.
                                                 console.log(error.message)
-                                                return Promise.reject(error.message);
-                                            } else {
-                                                console.log('unknown error while parsing', error);
-                                                switch (error) {
+                                                switch (error.message) {
                                                     case 'INVALID_COUNTRY': {
                                                         return Promise.reject('Country code is invalid');
                                                     }
+                                                    case 'NOT_A_NUMBER':
                                                     default: {
                                                         return Promise.reject('Your phone number is incorrect');
                                                     }
                                                 }
+                                            } else {
+                                                console.log('unknown error while parsing', error);
+                                                return Promise.reject(error.message);
                                             }
                                         }
                                         if (!phoneNumber.isValid() || !phoneNumber.isValid()) {

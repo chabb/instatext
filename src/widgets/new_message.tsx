@@ -37,16 +37,14 @@ const options = contacts => contacts.reduce((acc, ct: ITContact & {id: string, k
 
 // we build an inverted index of the contacts
 
-export const NewMessage: React.FC<ModalProps> = ({onFinish}) => {
+export const NewMessage: React.FC<ModalProps> = ({onFinish, form}) => {
     const contacts = useContacts(options);
     const fb = useContext(FirebaseContext);
 
-    setTimeout(() => notification.success({message: 'Message has been sent'}), 1000);
-
     return (
     <>
-        <Form onFinish={({message,recipients}) => {
-
+        <Form name='message' form={form}
+            onFinish={({message,recipients}) => {
             // expose an handler to parent instead
             // move this thing to RxJS
             fb!.sendSMSMessage('+19145590987', recipients[0], message)
@@ -88,11 +86,6 @@ export const NewMessage: React.FC<ModalProps> = ({onFinish}) => {
             </Form.Item>
             <Form.Item  validateTrigger={['onBlur']} label='Message' name='message' rules={[{ required: true }]}>
                 <Input.TextArea />
-            </Form.Item>
-            <Form.Item>
-                <Button type="primary" htmlType="submit">
-                    Envoyer
-                </Button>
             </Form.Item>
         </Form>
     </>)

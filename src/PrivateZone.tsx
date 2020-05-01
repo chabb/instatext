@@ -1,10 +1,10 @@
-import {Button, Layout, Modal, Menu } from "antd";
+import {Button, Layout, Modal, Menu, Form} from "antd";
 import {Link, NavLink, Redirect, Route, Switch, useLocation} from "react-router-dom";
 import {Inbox} from "./inbox/inbox";
 import {Contact} from "./contacts/contact";
 import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusOutlined } from '@ant-design/icons';
-import {NewContact} from "./widgets/new_contact";
+import {addContactFlow, NewContact} from "./widgets/new_contact";
 import {NewMessage} from "./widgets/new_message";
 import FirebaseContext from "./firebase/context";
 import {Data} from "./firebase/data-context";
@@ -12,6 +12,10 @@ import {Data} from "./firebase/data-context";
 const { Header, Footer, Sider, Content } = Layout;
 
 
+export enum FORM_ID {
+    CONTACT = 'CONTACT',
+    MESSAGE = 'MESSAGE'
+}
 
 export const DataContext = React.createContext<Data>(null as unknown as Data);
 
@@ -27,27 +31,38 @@ export const PrivateZone = () => {
         }
     }, []);
 
-    return <DataContext.Provider value={ctx}>
-        <_PrivateZone/>
-    </DataContext.Provider>
+    return (
+        <DataContext.Provider value={ctx}>
+            <_PrivateZone/>
+        </DataContext.Provider>);
 };
 
 
 
 const _PrivateZone = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const fb = useContext(FirebaseContext);
     const location = useLocation();
+
     const getApp = useCallback((pathname) => {
         switch (pathname) {
             case '/contact': {
-                return { title:'Add new contact', item: ['2'], modal:  <NewContact onFinish={() => setModalVisible(false)}/>};
+                return {
+                    id: FORM_ID.CONTACT,
+                    title:'Add new contact', item: ['2'], modal: () => <NewContact form={form} onFinish={() => setModalVisible(false)}/>};
             }
             default:
             case '/inbox': {
-                return { title:'Add new message', item: ['1'], modal:  <NewMessage onFinish={() => setModalVisible(false)}/>};
+                return {
+                    id: FORM_ID.MESSAGE,
+                    title:'Add new message', item: ['1'], modal: () => <NewMessage form={form} onFinish={() => setModalVisible(false)}/>};
             }
         }
     }, [setModalVisible]);
+
+    const [form] = Form.useForm();
+    console.log('THE FORM', form, location.pathname);
+
 
     const [currentApp, setCurrentApp] = useState<any>(getApp(location.pathname));
     useEffect(() => {
@@ -116,10 +131,43 @@ const _PrivateZone = () => {
         <Modal
             title={currentApp.title}
             visible={modalVisible}
-            onOk={() => setModalVisible(false)}
+            forceRender={true}
+            okText={currentApp.id === FORM_ID.CONTACT ? 'Create contact' : 'Send message'}
+            okButtonProps={{disabled: form.isFieldsTouched()}}
+
+            onOk={() => {
+                console.log(form);
+               switch (currentApp.id) {
+                   case FORM_ID.MESSAGE: {
+                       form.validateFields().then(() => {
+                           addContactFlow(fb, form, () => {
+                               form.resetFields();
+                               setModalVisible(false);
+                           },)
+                       }, (i) => {
+                           console.log('fa', i);
+                       });
+                       break
+                   }
+                   case FORM_ID.CONTACT: {
+                       form.validateFields().then(() => {
+                           addContactFlow(fb, form, () => {
+                               form.resetFields();
+                               setModalVisible(false);
+                           },)
+                       }, (i) => {
+                           console.log('fa', i);
+                       });
+                       break;
+                   }
+                   default: {
+                       console.error('unknown form id', currentApp.id);
+                   }
+               }
+            }}
             onCancel={() => setModalVisible(false)}
         >
-            {currentApp.modal}
+            {currentApp.modal()}
         </Modal>
     </Layout>)
 };

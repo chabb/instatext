@@ -20,6 +20,7 @@
     "firebase-admin": "^8.11.0",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
+    "libphonenumber-js": "^1.7.51",
     "random-timestamps": "^1.0.1",
     "random-words": "^1.1.1",
     "react": "^16.13.1",

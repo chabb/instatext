@@ -6,6 +6,7 @@ export interface ITMessage {
 
 export interface ModalProps {
     onFinish: () => void;
+    form: any;
 }
 
 // DB -> a users

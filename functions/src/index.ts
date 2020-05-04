@@ -1,15 +1,18 @@
 import * as functions from 'firebase-functions';
 import {Twilio} from 'twilio';
 import {MessageInstance, MessageStatus} from "twilio/lib/rest/api/v2010/account/message";
-import {Collection} from "../../src/firebase/db";
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 import * as admin from 'firebase-admin';
-import FieldValue = admin.firestore.FieldValue;
-import cors from 'cors';
+//import MessagingResponse = require("twilio/lib/twiml/MessagingResponse");
+//import * as cors from 'cors';
 
-const appCors = cors({origin:true});
-const db = admin.firestore();
+const cors = require('cors')({
+    origin: true,
+});
+
 admin.initializeApp();
+const db = admin.firestore();
+
 
 /*Listen for changes in all documents in the 'users' collection
 exports.useWildcard = functions.firestore
@@ -26,32 +29,10 @@ exports.useWildcard = functions.firestore
         // change.after.data() == {name: "Marie"}
     });*/
 
-exports.createSubaccount = functions.https.onCall(({friendlyName, userId}, context): Promise<SubAccountResponse>  => {
-    //TODO(chab) lazy initialization of twilio client
-    console.log('create subaccount called');
-    const sid = functions.config().twilio.sid;
-    const token = functions.config().twilio.token;
-    const client = new Twilio(sid, token);
-    console.log('Create subaccount for', friendlyName, userId);
-    return client.api.accounts.create({friendlyName: 'Submarine'})
-        .then(account => {
-            console.log('created account', account);
-            return {subAccountId:account.sid}
-        }, (e) => {
-           console.log('Failed to create', e);
-            throw new functions.https.HttpsError('internal', 'Message:' + e)
-        });
-});
 
-interface SubAccountResponse {
-    subAccountId: string;
-}
-
-exports.sendMessage = functions.https.onCall(({to, from, message}, context): Promise<SendMessageResponse> => {
-    console.log('start send message');
-    const sid = functions.config().twilio.sid;
+exports.sendMessage = functions.https.onCall(({to, from, message, subAccountId}, context): Promise<SendMessageResponse> => {
     const token = functions.config().twilio.token;
-    console.log(sid, token.slice(0, 5));
+    const sid = functions.config().twilio.sid;
     if (!context.auth! || !context.auth!.uid) {
         throw new functions.https.HttpsError('failed-precondition', 'The function must be called ' +
             'while authenticated.');
@@ -59,11 +40,14 @@ exports.sendMessage = functions.https.onCall(({to, from, message}, context): Pro
     if (!from || !to || !message) {
         throw new functions.https.HttpsError('unauthenticated', 'missing from/to/message field');
     }
-    const client = new Twilio(sid, token);
-    const textContent = {
+
+    // subaccounts need their own phone numbers
+    const client = new Twilio(sid, token); //{ accountSid: subAccountId });
+    const textContent: any = {
         body: message,
         to: to,
         from: from,
+        accountSid: subAccountId,
         statusCallback: 'https://us-central1-instatext-27374.cloudfunctions.net/webhook'
     };
     return client.messages.create(textContent)
@@ -71,7 +55,7 @@ exports.sendMessage = functions.https.onCall(({to, from, message}, context): Pro
                 from:m.from,
                 to:m.to,
                 id:m.sid,
-                status:m    .status
+                status:m.status
             })
         )
         .catch(e => {
@@ -85,6 +69,65 @@ export interface SendMessageResponse {
     to: string,
     id: string,
     status: MessageStatus
+}
+
+exports.createSubaccount = functions.https.onCall(({friendlyName, userId}, context): Promise<SubAccountResponse>  => {
+    //TODO(chab) lazy initialization of twilio client
+    console.log('create subaccount called');
+    const sid = functions.config().twilio.sid;
+    const token = functions.config().twilio.token;
+    const client = new Twilio(sid, token);
+    console.log('Create subaccount for', friendlyName, userId);
+    return client.api.accounts.create({friendlyName: 'Submarine'})
+        .then(account => {
+            console.log('created account', account);
+            return {subAccountId:account.sid}
+        }, (e) => {
+            console.log('Failed to create', e);
+            throw new functions.https.HttpsError('internal', 'Message:' + e)
+        });
+});
+
+
+exports.createPhone = functions.https.onCall(({subAccountId}) => {
+    // this will create a phone, and assign it immediately to the user subaccount
+    // once the user subaccount is created, it updates the firestore database
+
+
+    const sid = functions.config().twilio.sid;
+    const token = functions.config().twilio.token;
+    const client = new Twilio(sid, token);
+    return client.availablePhoneNumbers('US')
+        .local
+        .list({smsEnabled: true, beta:false, limit: 10})
+        .then(local => {
+            console.log(local);
+            return local[0].phoneNumber})
+        .then(phoneNumber => client.incomingPhoneNumbers.create({
+            statusCallback: 'https://us-central1-instatext-27374.cloudfunctions.net/webhook',
+            smsUrl: 'https://us-central1-instatext-27374.cloudfunctions.net/sendMessage',
+            phoneNumber:phoneNumber
+        }))
+        .then(i => {
+            console.log('created', i);
+            return i;
+        })
+        .then((incoming_phone_number: any) => {
+            console.log('success');
+            return {sid:incoming_phone_number.sid, phoneNumber: '+12073864877'}
+        })
+        .then(({sid, phoneNumber}) => {
+            console.log('will update', phoneNumber, ' to', subAccountId);
+            return client.incomingPhoneNumbers(sid)
+                .update({accountSid: subAccountId})
+        })
+        .then(incoming_phone_number => {
+            return incoming_phone_number.sid;
+        });
+});
+
+interface SubAccountResponse {
+    subAccountId: string;
 }
 
 
@@ -108,32 +151,73 @@ exports.webhook = functions.https.onRequest((req, res) => {
     //    MessageSid: 'SMf835763169154d9d9577ca3acec8ed84',
     //    AccountSid: 'ACf4382285c8585fdabef1bc684075040c',
     //    From: '+19145590987'
+    const from = req.body.From;
+    const status = req.body.SmsStatus;
+    const msStatus = req.body.messageStatus;
+    const to = req.body.To;
+    const id = req.body.MessageSid;
 
-
-    return appCors(req, res, () => {
+    return cors(req, res, () => {
         // [END usingMiddleware]
         // Reading date format from URL query parameter.
         // [START readQueryParam]
-        const from = req.body.From;
-        const status = req.body.Status;
-        const to = req.body.To;
-        const id = req.body.MessageSid;
         //admin.firestore().db.collectionGroup('')
         // normal flow, sent -> delivered
-        db.collection(Collection.MESSAGES)
-            .doc(id).update({
-            lastStatusUpdate: FieldValue.serverTimestamp(),
-            status: status
-        }).then(() => {
-            console.log('status updated for ', id, from, to, status);
+        const messages = db.collectionGroup('messages')
+            .where('sid', '==', id);
+        messages.get().then(function (querySnapshot) {
+            if (querySnapshot.size > 1) {
+                throw new functions.https.HttpsError('internal', 'Duplicate message' + id);
+            } else {
+                console.log('will update', status, msStatus);
+                querySnapshot.docs[0].ref.update({status}).then(() => {
+                    console.log('status updated for ', id, from, to, status)
+                }, (e) => {
+                    console.log('error updating status', e);
+                })
+            }
         }, (e) => {
-          console.log('error updating status', e);
+            console.log('error finding message', e);
         });
-
         res.status(200).send('hello');
         // [END sendResponse]
     });
 });
+
+/*
+exports.incoming = functions.https.onRequest((req, res) => {
+    let isValid = true;
+    const sid = functions.config().twilio.sid;
+    const token = functions.config().twilio.token;
+
+    // Only validate that requests came from Twilio when the function has been
+    // deployed to production.
+    if (process.env.NODE_ENV === 'production') {
+      //
+    }
+
+    // Halt early if the request was not sent from Twilio
+    if (!isValid) {
+        res
+            .type('text/plain')
+            .status(403)
+            .send('Twilio Request Validation Failed.')
+            .end();
+        return;
+    }
+
+    const { From, To, Body, MessageSid, AccountSid } = req.body;
+
+    // find message subcollection
+
+
+    // Send the response
+    res
+        .status(200)
+        .type('text/xml')
+        .end('hello');
+});
+
 // [END all]
 /*
 "account_sid": "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
@@ -159,3 +243,6 @@ exports.webhook = functions.https.onRequest((req, res) => {
 "to": "+15558675310",
     "uri": "/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json"
 }*/
+
+
+// we can store <from>.<to> pair to get the right chatroom

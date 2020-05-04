@@ -1,0 +1,351 @@
+[debug] [2020-05-04T16:47:17.487Z] ----------------------------------------------------------------------
+[debug] [2020-05-04T16:47:17.489Z] Command:       /Users/chabby/.nvm/versions/node/v12.4.0/bin/node /Users/chabby/.nvm/versions/node/v12.4.0/bin/firebase functions:shell
+[debug] [2020-05-04T16:47:17.489Z] CLI Version:   8.2.0
+[debug] [2020-05-04T16:47:17.489Z] Platform:      darwin
+[debug] [2020-05-04T16:47:17.489Z] Node Version:  v12.4.0
+[debug] [2020-05-04T16:47:17.490Z] Time:          Mon May 04 2020 18:47:17 GMT+0200 (Central European Summer Time)
+[debug] [2020-05-04T16:47:17.491Z] ----------------------------------------------------------------------
+[debug] [2020-05-04T16:47:17.491Z] 
+[debug] [2020-05-04T16:47:17.500Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-05-04T16:47:17.500Z] > authorizing via signed-in user
+[debug] [2020-05-04T16:47:17.500Z] [iam] checking project instatext-27374 for permissions ["firebase.projects.get"]
+[debug] [2020-05-04T16:47:17.503Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/instatext-27374:testIamPermissions  
+ {"permissions":["firebase.projects.get"]}
+[debug] [2020-05-04T16:47:18.675Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 04 May 2020 16:47:19 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=780","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "12"
+[info] ✔  functions: functions emulator started at http://localhost:5000
+[debug] [2020-05-04T16:47:18.697Z] [functions] Watching "/Users/chabby/instatext/functions" for Cloud Functions...
+[debug] [2020-05-04T16:47:18.704Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-04T16:47:18.704Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-05-04T16:47:18.704Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-04T16:47:18.705Z] DEBUG: [worker-~diagnostic~-5b7fa8ec-a183-4e63-bce1-be08912de184]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_34663.sock
+[debug] [2020-05-04T16:47:18.705Z] DEBUG: [worker-~diagnostic~-5b7fa8ec-a183-4e63-bce1-be08912de184]: BUSY
+[debug] [2020-05-04T16:47:18.967Z] DEBUG: [runtime-status] [34663] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-04T16:47:18.968Z] DEBUG: [runtime-status] [34663] Disabled runtime features: undefined
+[debug] [2020-05-04T16:47:18.970Z] DEBUG: [runtime-status] [34663] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:47:18.971Z] DEBUG: [runtime-status] [34663] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:47:18.971Z] DEBUG: [runtime-status] [34663] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-04T16:47:18.973Z] DEBUG: [runtime-status] [34663] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-04T16:47:19.000Z] DEBUG: [runtime-status] [34663] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-04T16:47:19.000Z] DEBUG: [runtime-status] [34663] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:47:19.001Z] DEBUG: [runtime-status] [34663] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:47:19.001Z] DEBUG: [runtime-status] [34663] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:47:19.001Z] DEBUG: [runtime-status] [34663] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-04T16:47:19.007Z] DEBUG: [runtime-status] [34663] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-04T16:47:19.175Z] [functions[sendMessage]] http function initialized (http://localhost:5000/instatext-27374/us-central1/sendMessage).
+[debug] [2020-05-04T16:47:19.175Z] [functions[createSubaccount]] http function initialized (http://localhost:5000/instatext-27374/us-central1/createSubaccount).
+[debug] [2020-05-04T16:47:19.175Z] [functions[createPhone]] http function initialized (http://localhost:5000/instatext-27374/us-central1/createPhone).
+[debug] [2020-05-04T16:47:19.175Z] [functions[webhook]] http function initialized (http://localhost:5000/instatext-27374/us-central1/webhook).
+[info] i  functions: Loaded functions: sendMessage, createSubaccount, createPhone, webhook
+[warn] ⚠  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub
+[debug] [2020-05-04T16:47:19.187Z] DEBUG: [worker-~diagnostic~-5b7fa8ec-a183-4e63-bce1-be08912de184]: IDLE
+[debug] [2020-05-04T16:47:28.946Z] [work-queue] {"queueLength":1,"workRunningCount":0}
+[debug] [2020-05-04T16:47:28.947Z] [work-queue] {"queueLength":0,"workRunningCount":1}
+[debug] [2020-05-04T16:47:28.947Z] Accepted request POST /instatext-27374/us-central1/createPhone --> createPhone
+[debug] [2020-05-04T16:47:28.952Z] DEBUG: [worker-pool] addWorker(createPhone)
+[debug] [2020-05-04T16:47:28.952Z] DEBUG: [worker-pool] Adding worker with key createPhone, total=1
+[debug] [2020-05-04T16:47:28.952Z] DEBUG: [worker-pool] submitWork(triggerId=createPhone)
+[debug] [2020-05-04T16:47:28.953Z] DEBUG: [worker-createPhone-4c4bc9ee-3992-4b70-8778-5b196d686d20]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_34664.sock
+[debug] [2020-05-04T16:47:28.953Z] DEBUG: [worker-createPhone-4c4bc9ee-3992-4b70-8778-5b196d686d20]: BUSY
+[debug] [2020-05-04T16:47:29.240Z] DEBUG: [runtime-status] [34664] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-04T16:47:29.241Z] DEBUG: [runtime-status] [34664] Disabled runtime features: undefined
+[debug] [2020-05-04T16:47:29.243Z] DEBUG: [runtime-status] [34664] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:47:29.244Z] DEBUG: [runtime-status] [34664] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:47:29.244Z] DEBUG: [runtime-status] [34664] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-04T16:47:29.246Z] DEBUG: [runtime-status] [34664] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-04T16:47:29.280Z] DEBUG: [runtime-status] [34664] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-04T16:47:29.281Z] DEBUG: [runtime-status] [34664] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:47:29.282Z] DEBUG: [runtime-status] [34664] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:47:29.282Z] DEBUG: [runtime-status] [34664] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:47:29.282Z] DEBUG: [runtime-status] [34664] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-04T16:47:29.289Z] DEBUG: [runtime-status] [34664] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-04T16:47:29.483Z] DEBUG: [runtime-status] [34664] Trigger "createPhone" has been found, beginning invocation!
+[debug] [2020-05-04T16:47:29.484Z] [functions] Beginning execution of "createPhone"
+[debug] [2020-05-04T16:47:29.484Z] DEBUG: [runtime-status] [34664] triggerDefinition {"httpsTrigger":{},"labels":{"deployment-callable":"true"},"name":"createPhone","entryPoint":"createPhone"}
+[debug] [2020-05-04T16:47:29.484Z] DEBUG: [runtime-status] [34664] Running createPhone in mode HTTPS
+[debug] [2020-05-04T16:47:29.487Z] DEBUG: [runtime-status] [34664] Attempting to listen to socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_34664.sock
+[debug] [2020-05-04T16:47:29.491Z] DEBUG: [functions] Runtime ready! Sending request!
+[debug] [2020-05-04T16:47:29.511Z] DEBUG: [runtime-status] [34664] Ephemeral server handling POST request
+[debug] [2020-05-04T16:47:29.514Z] DEBUG: [runtime-status] [34664] No callable functions auth found
+[debug] [2020-05-04T16:47:29.514Z] DEBUG: [runtime-status] [34664] config() parent accessed! {"parentKey":"twilio","parentConfig":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-04T16:47:29.515Z] DEBUG: [runtime-status] [34664] config() parent accessed! {"parentKey":"twilio","parentConfig":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-04T16:47:29.860Z] DEBUG: [runtime-status] [34664] Ephemeral server survived.
+[info] >  [ {"user":"["}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9523', {"user":"    friendlyName: '(205) 782-9523',"}
+[info] >      phoneNumber: '+12057829523', {"user":"    phoneNumber: '+12057829523',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9032', {"user":"    friendlyName: '(205) 782-9032',"}
+[info] >      phoneNumber: '+12057829032', {"user":"    phoneNumber: '+12057829032',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9612', {"user":"    friendlyName: '(205) 782-9612',"}
+[info] >      phoneNumber: '+12057829612', {"user":"    phoneNumber: '+12057829612',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9442', {"user":"    friendlyName: '(205) 782-9442',"}
+[info] >      phoneNumber: '+12057829442', {"user":"    phoneNumber: '+12057829442',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-8065', {"user":"    friendlyName: '(205) 782-8065',"}
+[info] >      phoneNumber: '+12057828065', {"user":"    phoneNumber: '+12057828065',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9147', {"user":"    friendlyName: '(205) 782-9147',"}
+[info] >      phoneNumber: '+12057829147', {"user":"    phoneNumber: '+12057829147',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9230', {"user":"    friendlyName: '(205) 782-9230',"}
+[info] >      phoneNumber: '+12057829230', {"user":"    phoneNumber: '+12057829230',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-9396', {"user":"    friendlyName: '(205) 782-9396',"}
+[info] >      phoneNumber: '+12057829396', {"user":"    phoneNumber: '+12057829396',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-8258', {"user":"    friendlyName: '(205) 782-8258',"}
+[info] >      phoneNumber: '+12057828258', {"user":"    phoneNumber: '+12057828258',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    }, {"user":"  },"}
+[info] >    { {"user":"  {"}
+[info] >      friendlyName: '(205) 782-8824', {"user":"    friendlyName: '(205) 782-8824',"}
+[info] >      phoneNumber: '+12057828824', {"user":"    phoneNumber: '+12057828824',"}
+[info] >      lata: null, {"user":"    lata: null,"}
+[info] >      locality: null, {"user":"    locality: null,"}
+[info] >      rateCenter: null, {"user":"    rateCenter: null,"}
+[info] >      latitude: null, {"user":"    latitude: null,"}
+[info] >      longitude: null, {"user":"    longitude: null,"}
+[info] >      region: 'AL', {"user":"    region: 'AL',"}
+[info] >      postalCode: null, {"user":"    postalCode: null,"}
+[info] >      isoCountry: 'US', {"user":"    isoCountry: 'US',"}
+[info] >      addressRequirements: 'none', {"user":"    addressRequirements: 'none',"}
+[info] >      beta: false, {"user":"    beta: false,"}
+[info] >      capabilities: { voice: true, SMS: true, MMS: true, fax: true } {"user":"    capabilities: { voice: true, SMS: true, MMS: true, fax: true }"}
+[info] >    } {"user":"  }"}
+[info] >  ] {"user":"]"}
+[info] >  created { {"user":"created {"}
+[info] >    accountSid: 'ACf4382285c8585fdabef1bc684075040c', {"user":"  accountSid: 'ACf4382285c8585fdabef1bc684075040c',"}
+[info] >    addressSid: null, {"user":"  addressSid: null,"}
+[info] >    addressRequirements: 'none', {"user":"  addressRequirements: 'none',"}
+[info] >    apiVersion: '2010-04-01', {"user":"  apiVersion: '2010-04-01',"}
+[info] >    beta: false, {"user":"  beta: false,"}
+[info] >    capabilities: { voice: true, sms: true, mms: true, fax: true }, {"user":"  capabilities: { voice: true, sms: true, mms: true, fax: true },"}
+[info] >    dateCreated: 2020-05-04T16:47:35.000Z, {"user":"  dateCreated: 2020-05-04T16:47:35.000Z,"}
+[info] >    dateUpdated: 2020-05-04T16:47:35.000Z, {"user":"  dateUpdated: 2020-05-04T16:47:35.000Z,"}
+[info] >    friendlyName: '(205) 782-9523', {"user":"  friendlyName: '(205) 782-9523',"}
+[info] >    identitySid: null, {"user":"  identitySid: null,"}
+[info] >    phoneNumber: '+12057829523', {"user":"  phoneNumber: '+12057829523',"}
+[info] >    origin: 'twilio', {"user":"  origin: 'twilio',"}
+[info] >    sid: 'PN0bb0712d769d7e39ab15bd521f013b9b', {"user":"  sid: 'PN0bb0712d769d7e39ab15bd521f013b9b',"}
+[info] >    smsApplicationSid: '', {"user":"  smsApplicationSid: '',"}
+[info] >    smsFallbackMethod: 'POST', {"user":"  smsFallbackMethod: 'POST',"}
+[info] >    smsFallbackUrl: '', {"user":"  smsFallbackUrl: '',"}
+[info] >    smsMethod: 'POST', {"user":"  smsMethod: 'POST',"}
+[info] >    smsUrl: 'https://us-central1-instatext-27374.cloudfunctions.net/sendMessage', {"user":"  smsUrl: 'https://us-central1-instatext-27374.cloudfunctions.net/sendMessage',"}
+[info] >    statusCallback: 'https://us-central1-instatext-27374.cloudfunctions.net/webhook', {"user":"  statusCallback: 'https://us-central1-instatext-27374.cloudfunctions.net/webhook',"}
+[info] >    statusCallbackMethod: 'POST', {"user":"  statusCallbackMethod: 'POST',"}
+[info] >    trunkSid: null, {"user":"  trunkSid: null,"}
+[info] >    uri: '/2010-04-01/Accounts/ACf4382285c8585fdabef1bc684075040c/IncomingPhoneNumbers/PN0bb0712d769d7e39ab15bd521f013b9b.json', {"user":"  uri: '/2010-04-01/Accounts/ACf4382285c8585fdabef1bc684075040c/IncomingPhoneNumbers/PN0bb0712d769d7e39ab15bd521f013b9b.json',"}
+[info] >    voiceApplicationSid: null, {"user":"  voiceApplicationSid: null,"}
+[info] >    voiceCallerIdLookup: false, {"user":"  voiceCallerIdLookup: false,"}
+[info] >    voiceFallbackMethod: 'POST', {"user":"  voiceFallbackMethod: 'POST',"}
+[info] >    voiceFallbackUrl: null, {"user":"  voiceFallbackUrl: null,"}
+[info] >    voiceMethod: 'POST', {"user":"  voiceMethod: 'POST',"}
+[info] >    voiceUrl: null, {"user":"  voiceUrl: null,"}
+[info] >    emergencyStatus: 'Inactive', {"user":"  emergencyStatus: 'Inactive',"}
+[info] >    emergencyAddressSid: null, {"user":"  emergencyAddressSid: null,"}
+[info] >    bundleSid: null {"user":"  bundleSid: null"}
+[info] >  } {"user":"}"}
+[info] >  success {"user":"success"}
+[info] >  will update +12073864877  to ACefe31cec2ba49f56c38516f182f70591 {"user":"will update +12073864877  to ACefe31cec2ba49f56c38516f182f70591"}
+[info] >  incoming phone number { {"user":"incoming phone number {"}
+[info] >    accountSid: 'ACefe31cec2ba49f56c38516f182f70591', {"user":"  accountSid: 'ACefe31cec2ba49f56c38516f182f70591',"}
+[info] >    addressSid: null, {"user":"  addressSid: null,"}
+[info] >    addressRequirements: 'none', {"user":"  addressRequirements: 'none',"}
+[info] >    apiVersion: '2010-04-01', {"user":"  apiVersion: '2010-04-01',"}
+[info] >    beta: false, {"user":"  beta: false,"}
+[info] >    capabilities: { voice: true, sms: true, mms: true, fax: true }, {"user":"  capabilities: { voice: true, sms: true, mms: true, fax: true },"}
+[info] >    dateCreated: 2020-05-04T16:47:35.000Z, {"user":"  dateCreated: 2020-05-04T16:47:35.000Z,"}
+[info] >    dateUpdated: 2020-05-04T16:47:37.000Z, {"user":"  dateUpdated: 2020-05-04T16:47:37.000Z,"}
+[info] >    friendlyName: '(205) 782-9523', {"user":"  friendlyName: '(205) 782-9523',"}
+[info] >    identitySid: null, {"user":"  identitySid: null,"}
+[info] >    phoneNumber: '+12057829523', {"user":"  phoneNumber: '+12057829523',"}
+[info] >    origin: 'twilio', {"user":"  origin: 'twilio',"}
+[info] >    sid: 'PN0bb0712d769d7e39ab15bd521f013b9b', {"user":"  sid: 'PN0bb0712d769d7e39ab15bd521f013b9b',"}
+[info] >    smsApplicationSid: '', {"user":"  smsApplicationSid: '',"}
+[info] >    smsFallbackMethod: 'POST', {"user":"  smsFallbackMethod: 'POST',"}
+[info] >    smsFallbackUrl: '', {"user":"  smsFallbackUrl: '',"}
+[info] >    smsMethod: 'POST', {"user":"  smsMethod: 'POST',"}
+[info] >    smsUrl: 'https://us-central1-instatext-27374.cloudfunctions.net/sendMessage', {"user":"  smsUrl: 'https://us-central1-instatext-27374.cloudfunctions.net/sendMessage',"}
+[info] >    statusCallback: 'https://us-central1-instatext-27374.cloudfunctions.net/webhook', {"user":"  statusCallback: 'https://us-central1-instatext-27374.cloudfunctions.net/webhook',"}
+[info] >    statusCallbackMethod: 'POST', {"user":"  statusCallbackMethod: 'POST',"}
+[info] >    trunkSid: null, {"user":"  trunkSid: null,"}
+[info] >    uri: '/2010-04-01/Accounts/ACefe31cec2ba49f56c38516f182f70591/IncomingPhoneNumbers/PN0bb0712d769d7e39ab15bd521f013b9b.json', {"user":"  uri: '/2010-04-01/Accounts/ACefe31cec2ba49f56c38516f182f70591/IncomingPhoneNumbers/PN0bb0712d769d7e39ab15bd521f013b9b.json',"}
+[info] >    voiceApplicationSid: null, {"user":"  voiceApplicationSid: null,"}
+[info] >    voiceCallerIdLookup: false, {"user":"  voiceCallerIdLookup: false,"}
+[info] >    voiceFallbackMethod: 'POST', {"user":"  voiceFallbackMethod: 'POST',"}
+[info] >    voiceFallbackUrl: null, {"user":"  voiceFallbackUrl: null,"}
+[info] >    voiceMethod: 'POST', {"user":"  voiceMethod: 'POST',"}
+[info] >    voiceUrl: null, {"user":"  voiceUrl: null,"}
+[info] >    emergencyStatus: 'Inactive', {"user":"  emergencyStatus: 'Inactive',"}
+[info] >    emergencyAddressSid: null, {"user":"  emergencyAddressSid: null,"}
+[info] >    bundleSid: null {"user":"  bundleSid: null"}
+[info] >  } {"user":"}"}
+[debug] [2020-05-04T16:47:36.807Z] [functions] Finished "createPhone" in ~7s
+[debug] [2020-05-04T16:47:36.807Z] DEBUG: [worker-createPhone-4c4bc9ee-3992-4b70-8778-5b196d686d20]: IDLE
+[debug] [2020-05-04T16:47:36.807Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2020-05-04T16:54:57.535Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-04T16:54:58.539Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-04T16:54:58.539Z] DEBUG: [worker-~diagnostic~-5b7fa8ec-a183-4e63-bce1-be08912de184]: FINISHING
+[debug] [2020-05-04T16:54:58.540Z] DEBUG: [worker-pool] Shutting down IDLE worker (createPhone)
+[debug] [2020-05-04T16:54:58.540Z] DEBUG: [worker-createPhone-4c4bc9ee-3992-4b70-8778-5b196d686d20]: FINISHING
+[debug] [2020-05-04T16:54:58.546Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-04T16:54:58.546Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-04T16:54:58.546Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-04T16:54:58.546Z] DEBUG: [worker-~diagnostic~-d3910aa6-a4d1-4bd0-bef0-498db1c39b6c]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_34689.sock
+[debug] [2020-05-04T16:54:58.546Z] DEBUG: [worker-~diagnostic~-d3910aa6-a4d1-4bd0-bef0-498db1c39b6c]: BUSY
+[debug] [2020-05-04T16:54:58.550Z] DEBUG: [worker-~diagnostic~-5b7fa8ec-a183-4e63-bce1-be08912de184]: exited
+[debug] [2020-05-04T16:54:58.550Z] DEBUG: [worker-~diagnostic~-5b7fa8ec-a183-4e63-bce1-be08912de184]: FINISHED
+[debug] [2020-05-04T16:54:58.552Z] DEBUG: [worker-createPhone-4c4bc9ee-3992-4b70-8778-5b196d686d20]: exited
+[debug] [2020-05-04T16:54:58.552Z] DEBUG: [worker-createPhone-4c4bc9ee-3992-4b70-8778-5b196d686d20]: FINISHED
+[debug] [2020-05-04T16:54:59.357Z] DEBUG: [runtime-status] [34689] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-04T16:54:59.360Z] DEBUG: [runtime-status] [34689] Disabled runtime features: undefined
+[debug] [2020-05-04T16:54:59.365Z] DEBUG: [runtime-status] [34689] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:54:59.366Z] DEBUG: [runtime-status] [34689] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:54:59.367Z] DEBUG: [runtime-status] [34689] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-04T16:54:59.369Z] DEBUG: [runtime-status] [34689] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-04T16:54:59.435Z] DEBUG: [runtime-status] [34689] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-04T16:54:59.436Z] DEBUG: [runtime-status] [34689] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:54:59.436Z] DEBUG: [runtime-status] [34689] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:54:59.437Z] DEBUG: [runtime-status] [34689] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:54:59.437Z] DEBUG: [runtime-status] [34689] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-04T16:54:59.449Z] DEBUG: [runtime-status] [34689] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-04T16:55:00.063Z] DEBUG: [worker-~diagnostic~-d3910aa6-a4d1-4bd0-bef0-498db1c39b6c]: IDLE
+[debug] [2020-05-04T16:55:12.505Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-04T16:55:13.505Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-04T16:55:13.506Z] DEBUG: [worker-~diagnostic~-d3910aa6-a4d1-4bd0-bef0-498db1c39b6c]: FINISHING
+[debug] [2020-05-04T16:55:13.506Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-04T16:55:13.506Z] DEBUG: [worker-pool] Cleaned up workers for createPhone: 1 --> 0
+[debug] [2020-05-04T16:55:13.509Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-04T16:55:13.509Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-04T16:55:13.509Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-04T16:55:13.510Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_34691.sock
+[debug] [2020-05-04T16:55:13.510Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: BUSY
+[debug] [2020-05-04T16:55:13.511Z] DEBUG: [worker-~diagnostic~-d3910aa6-a4d1-4bd0-bef0-498db1c39b6c]: exited
+[debug] [2020-05-04T16:55:13.511Z] DEBUG: [worker-~diagnostic~-d3910aa6-a4d1-4bd0-bef0-498db1c39b6c]: FINISHED
+[debug] [2020-05-04T16:55:13.772Z] DEBUG: [runtime-status] [34691] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-04T16:55:13.774Z] DEBUG: [runtime-status] [34691] Disabled runtime features: undefined
+[debug] [2020-05-04T16:55:13.775Z] DEBUG: [runtime-status] [34691] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:55:13.776Z] DEBUG: [runtime-status] [34691] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:55:13.776Z] DEBUG: [runtime-status] [34691] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-04T16:55:13.778Z] DEBUG: [runtime-status] [34691] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-04T16:55:13.804Z] DEBUG: [runtime-status] [34691] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-04T16:55:13.804Z] DEBUG: [runtime-status] [34691] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:55:13.805Z] DEBUG: [runtime-status] [34691] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-04T16:55:13.805Z] DEBUG: [runtime-status] [34691] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-04T16:55:13.806Z] DEBUG: [runtime-status] [34691] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-04T16:55:13.811Z] DEBUG: [runtime-status] [34691] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-04T16:55:13.968Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: IDLE

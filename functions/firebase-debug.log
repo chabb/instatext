@@ -349,3 +349,178 @@
 [debug] [2020-05-04T16:55:13.811Z] DEBUG: [runtime-status] [34691] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
 [warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
 [debug] [2020-05-04T16:55:13.968Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: IDLE
+[debug] [2020-05-05T06:46:50.391Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:46:51.412Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:46:51.412Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: FINISHING
+[debug] [2020-05-05T06:46:51.414Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:46:51.425Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:46:51.426Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:46:51.426Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:46:51.427Z] DEBUG: [worker-~diagnostic~-5aeb892b-57c2-403f-87d1-6099ba781844]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36026.sock
+[debug] [2020-05-05T06:46:51.427Z] DEBUG: [worker-~diagnostic~-5aeb892b-57c2-403f-87d1-6099ba781844]: BUSY
+[debug] [2020-05-05T06:46:51.429Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: exited
+[debug] [2020-05-05T06:46:51.429Z] DEBUG: [worker-~diagnostic~-25a2f996-5726-4311-ab82-18c6cff44d3f]: FINISHED
+[debug] [2020-05-05T06:46:52.092Z] DEBUG: [runtime-status] [36026] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:46:52.094Z] DEBUG: [runtime-status] [36026] Disabled runtime features: undefined
+[debug] [2020-05-05T06:46:52.096Z] DEBUG: [runtime-status] [36026] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:46:52.097Z] DEBUG: [runtime-status] [36026] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:46:52.099Z] DEBUG: [runtime-status] [36026] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:46:52.101Z] DEBUG: [runtime-status] [36026] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:46:52.159Z] DEBUG: [runtime-status] [36026] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:46:52.161Z] DEBUG: [runtime-status] [36026] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:46:52.162Z] DEBUG: [runtime-status] [36026] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:46:52.162Z] DEBUG: [runtime-status] [36026] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:46:52.163Z] DEBUG: [runtime-status] [36026] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:46:52.177Z] DEBUG: [runtime-status] [36026] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:46:52.654Z] DEBUG: [worker-~diagnostic~-5aeb892b-57c2-403f-87d1-6099ba781844]: IDLE
+[debug] [2020-05-05T06:48:16.217Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:48:17.228Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:48:17.228Z] DEBUG: [worker-~diagnostic~-5aeb892b-57c2-403f-87d1-6099ba781844]: FINISHING
+[debug] [2020-05-05T06:48:17.228Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:48:17.234Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:48:17.234Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:48:17.234Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:48:17.234Z] DEBUG: [worker-~diagnostic~-78b23806-9ea6-47e3-97c1-ef8ae1ce5928]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36028.sock
+[debug] [2020-05-05T06:48:17.234Z] DEBUG: [worker-~diagnostic~-78b23806-9ea6-47e3-97c1-ef8ae1ce5928]: BUSY
+[debug] [2020-05-05T06:48:17.235Z] DEBUG: [worker-~diagnostic~-5aeb892b-57c2-403f-87d1-6099ba781844]: exited
+[debug] [2020-05-05T06:48:17.235Z] DEBUG: [worker-~diagnostic~-5aeb892b-57c2-403f-87d1-6099ba781844]: FINISHED
+[debug] [2020-05-05T06:48:17.707Z] DEBUG: [runtime-status] [36028] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:48:17.724Z] DEBUG: [runtime-status] [36028] Disabled runtime features: undefined
+[debug] [2020-05-05T06:48:17.725Z] DEBUG: [runtime-status] [36028] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:48:17.726Z] DEBUG: [runtime-status] [36028] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:48:17.726Z] DEBUG: [runtime-status] [36028] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:48:17.727Z] DEBUG: [runtime-status] [36028] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:48:17.762Z] DEBUG: [runtime-status] [36028] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:48:17.762Z] DEBUG: [runtime-status] [36028] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:48:17.763Z] DEBUG: [runtime-status] [36028] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:48:17.763Z] DEBUG: [runtime-status] [36028] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:48:17.763Z] DEBUG: [runtime-status] [36028] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:48:17.775Z] DEBUG: [runtime-status] [36028] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:48:18.152Z] DEBUG: [worker-~diagnostic~-78b23806-9ea6-47e3-97c1-ef8ae1ce5928]: IDLE
+[debug] [2020-05-05T06:48:37.237Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:48:38.242Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:48:38.242Z] DEBUG: [worker-~diagnostic~-78b23806-9ea6-47e3-97c1-ef8ae1ce5928]: FINISHING
+[debug] [2020-05-05T06:48:38.242Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:48:38.246Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:48:38.246Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:48:38.246Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:48:38.246Z] DEBUG: [worker-~diagnostic~-99fc3a6c-97ee-48d3-a422-5e01600f0323]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36030.sock
+[debug] [2020-05-05T06:48:38.246Z] DEBUG: [worker-~diagnostic~-99fc3a6c-97ee-48d3-a422-5e01600f0323]: BUSY
+[debug] [2020-05-05T06:48:38.248Z] DEBUG: [worker-~diagnostic~-78b23806-9ea6-47e3-97c1-ef8ae1ce5928]: exited
+[debug] [2020-05-05T06:48:38.248Z] DEBUG: [worker-~diagnostic~-78b23806-9ea6-47e3-97c1-ef8ae1ce5928]: FINISHED
+[debug] [2020-05-05T06:48:38.543Z] DEBUG: [runtime-status] [36030] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:48:38.544Z] DEBUG: [runtime-status] [36030] Disabled runtime features: undefined
+[debug] [2020-05-05T06:48:38.552Z] DEBUG: [runtime-status] [36030] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:48:38.552Z] DEBUG: [runtime-status] [36030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:48:38.553Z] DEBUG: [runtime-status] [36030] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:48:38.554Z] DEBUG: [runtime-status] [36030] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:48:38.581Z] DEBUG: [runtime-status] [36030] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:48:38.581Z] DEBUG: [runtime-status] [36030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:48:38.582Z] DEBUG: [runtime-status] [36030] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:48:38.582Z] DEBUG: [runtime-status] [36030] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:48:38.582Z] DEBUG: [runtime-status] [36030] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:48:38.589Z] DEBUG: [runtime-status] [36030] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:48:38.794Z] DEBUG: [worker-~diagnostic~-99fc3a6c-97ee-48d3-a422-5e01600f0323]: IDLE
+[debug] [2020-05-05T06:49:05.865Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:49:06.871Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:49:06.872Z] DEBUG: [worker-~diagnostic~-99fc3a6c-97ee-48d3-a422-5e01600f0323]: FINISHING
+[debug] [2020-05-05T06:49:06.872Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:49:06.876Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:49:06.876Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:49:06.876Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:49:06.876Z] DEBUG: [worker-~diagnostic~-ab9cef5d-3121-4460-92af-b9da6eb199ad]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36032.sock
+[debug] [2020-05-05T06:49:06.877Z] DEBUG: [worker-~diagnostic~-ab9cef5d-3121-4460-92af-b9da6eb199ad]: BUSY
+[debug] [2020-05-05T06:49:06.883Z] DEBUG: [worker-~diagnostic~-99fc3a6c-97ee-48d3-a422-5e01600f0323]: exited
+[debug] [2020-05-05T06:49:06.883Z] DEBUG: [worker-~diagnostic~-99fc3a6c-97ee-48d3-a422-5e01600f0323]: FINISHED
+[debug] [2020-05-05T06:49:07.138Z] DEBUG: [runtime-status] [36032] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:49:07.139Z] DEBUG: [runtime-status] [36032] Disabled runtime features: undefined
+[debug] [2020-05-05T06:49:07.141Z] DEBUG: [runtime-status] [36032] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:49:07.142Z] DEBUG: [runtime-status] [36032] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:49:07.142Z] DEBUG: [runtime-status] [36032] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:49:07.144Z] DEBUG: [runtime-status] [36032] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:49:07.179Z] DEBUG: [runtime-status] [36032] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:49:07.180Z] DEBUG: [runtime-status] [36032] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:49:07.180Z] DEBUG: [runtime-status] [36032] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:49:07.180Z] DEBUG: [runtime-status] [36032] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:49:07.181Z] DEBUG: [runtime-status] [36032] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:49:07.182Z] DEBUG: [runtime-status] [36032] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:49:07.354Z] DEBUG: [worker-~diagnostic~-ab9cef5d-3121-4460-92af-b9da6eb199ad]: IDLE
+[debug] [2020-05-05T06:49:51.133Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:49:52.155Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:49:52.155Z] DEBUG: [worker-~diagnostic~-ab9cef5d-3121-4460-92af-b9da6eb199ad]: FINISHING
+[debug] [2020-05-05T06:49:52.155Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:49:52.159Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:49:52.159Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:49:52.160Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:49:52.160Z] DEBUG: [worker-~diagnostic~-91621f95-8e3b-437e-b154-1fd1eac5087e]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36034.sock
+[debug] [2020-05-05T06:49:52.160Z] DEBUG: [worker-~diagnostic~-91621f95-8e3b-437e-b154-1fd1eac5087e]: BUSY
+[debug] [2020-05-05T06:49:52.161Z] DEBUG: [worker-~diagnostic~-ab9cef5d-3121-4460-92af-b9da6eb199ad]: exited
+[debug] [2020-05-05T06:49:52.161Z] DEBUG: [worker-~diagnostic~-ab9cef5d-3121-4460-92af-b9da6eb199ad]: FINISHED
+[debug] [2020-05-05T06:49:52.415Z] DEBUG: [runtime-status] [36034] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:49:52.416Z] DEBUG: [runtime-status] [36034] Disabled runtime features: undefined
+[debug] [2020-05-05T06:49:52.418Z] DEBUG: [runtime-status] [36034] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:49:52.419Z] DEBUG: [runtime-status] [36034] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:49:52.435Z] DEBUG: [runtime-status] [36034] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:49:52.435Z] DEBUG: [runtime-status] [36034] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:49:52.448Z] DEBUG: [runtime-status] [36034] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:49:52.449Z] DEBUG: [runtime-status] [36034] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:49:52.450Z] DEBUG: [runtime-status] [36034] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:49:52.451Z] DEBUG: [runtime-status] [36034] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:49:52.451Z] DEBUG: [runtime-status] [36034] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:49:52.456Z] DEBUG: [runtime-status] [36034] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:49:52.623Z] DEBUG: [worker-~diagnostic~-91621f95-8e3b-437e-b154-1fd1eac5087e]: IDLE
+[debug] [2020-05-05T06:50:17.546Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:50:18.549Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:50:18.549Z] DEBUG: [worker-~diagnostic~-91621f95-8e3b-437e-b154-1fd1eac5087e]: FINISHING
+[debug] [2020-05-05T06:50:18.550Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:50:18.557Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:50:18.557Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:50:18.557Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:50:18.557Z] DEBUG: [worker-~diagnostic~-46b54a0e-e95e-4708-bf37-d53c22ab61de]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36036.sock
+[debug] [2020-05-05T06:50:18.557Z] DEBUG: [worker-~diagnostic~-46b54a0e-e95e-4708-bf37-d53c22ab61de]: BUSY
+[debug] [2020-05-05T06:50:18.559Z] DEBUG: [worker-~diagnostic~-91621f95-8e3b-437e-b154-1fd1eac5087e]: exited
+[debug] [2020-05-05T06:50:18.560Z] DEBUG: [worker-~diagnostic~-91621f95-8e3b-437e-b154-1fd1eac5087e]: FINISHED
+[debug] [2020-05-05T06:50:18.940Z] DEBUG: [runtime-status] [36036] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:50:18.948Z] DEBUG: [runtime-status] [36036] Disabled runtime features: undefined
+[debug] [2020-05-05T06:50:18.948Z] DEBUG: [runtime-status] [36036] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:50:18.949Z] DEBUG: [runtime-status] [36036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:50:18.949Z] DEBUG: [runtime-status] [36036] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:50:18.949Z] DEBUG: [runtime-status] [36036] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:50:18.997Z] DEBUG: [runtime-status] [36036] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:50:18.998Z] DEBUG: [runtime-status] [36036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:50:18.999Z] DEBUG: [runtime-status] [36036] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:50:18.999Z] DEBUG: [runtime-status] [36036] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:50:18.999Z] DEBUG: [runtime-status] [36036] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:50:19.006Z] DEBUG: [runtime-status] [36036] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:50:19.292Z] DEBUG: [worker-~diagnostic~-46b54a0e-e95e-4708-bf37-d53c22ab61de]: IDLE
+[debug] [2020-05-05T06:51:12.288Z] DEBUG: File /Users/chabby/instatext/functions/src/index.ts changed, reloading triggers
+[debug] [2020-05-05T06:51:13.289Z] DEBUG: [worker-pool] Shutting down IDLE worker (~diagnostic~)
+[debug] [2020-05-05T06:51:13.290Z] DEBUG: [worker-~diagnostic~-46b54a0e-e95e-4708-bf37-d53c22ab61de]: FINISHING
+[debug] [2020-05-05T06:51:13.290Z] DEBUG: [worker-pool] Cleaned up workers for ~diagnostic~: 2 --> 1
+[debug] [2020-05-05T06:51:13.294Z] DEBUG: [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-05-05T06:51:13.294Z] DEBUG: [worker-pool] Adding worker with key ~diagnostic~, total=2
+[debug] [2020-05-05T06:51:13.294Z] DEBUG: [worker-pool] submitWork(triggerId=)
+[debug] [2020-05-05T06:51:13.294Z] DEBUG: [worker-~diagnostic~-b06a3990-5634-4548-8a79-3055809ffb61]: Assigning socketPath: /var/folders/vt/463ccbh11dg34f93bggtb1700000gn/T/fire_emu_36040.sock
+[debug] [2020-05-05T06:51:13.294Z] DEBUG: [worker-~diagnostic~-b06a3990-5634-4548-8a79-3055809ffb61]: BUSY
+[debug] [2020-05-05T06:51:13.296Z] DEBUG: [worker-~diagnostic~-46b54a0e-e95e-4708-bf37-d53c22ab61de]: exited
+[debug] [2020-05-05T06:51:13.296Z] DEBUG: [worker-~diagnostic~-46b54a0e-e95e-4708-bf37-d53c22ab61de]: FINISHED
+[debug] [2020-05-05T06:51:13.583Z] DEBUG: [runtime-status] [36040] Functions runtime initialized. {"cwd":"/Users/chabby/instatext/functions","node_version":"12.4.0"}
+[debug] [2020-05-05T06:51:13.585Z] DEBUG: [runtime-status] [36040] Disabled runtime features: undefined
+[debug] [2020-05-05T06:51:13.587Z] DEBUG: [runtime-status] [36040] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:51:13.593Z] DEBUG: [runtime-status] [36040] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:51:13.593Z] DEBUG: [runtime-status] [36040] Found local functions config: /Users/chabby/instatext/functions/.runtimeconfig.json
+[debug] [2020-05-05T06:51:13.594Z] DEBUG: [runtime-status] [36040] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}]
+[debug] [2020-05-05T06:51:13.618Z] DEBUG: [runtime-status] [36040] Checked functions.config() {"config":{"twilio":{"token":"aca828f3ac066708ff784e53b8c6ce6e","sid":"ACf4382285c8585fdabef1bc684075040c"}}}
+[debug] [2020-05-05T06:51:13.619Z] DEBUG: [runtime-status] [36040] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:51:13.620Z] DEBUG: [runtime-status] [36040] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-05-05T06:51:13.620Z] DEBUG: [runtime-status] [36040] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.6.1","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-05-05T06:51:13.620Z] DEBUG: [runtime-status] [36040] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"8.11.0","resolution":"/Users/chabby/instatext/functions/node_modules/firebase-admin/lib/index.js"}}
+[debug] [2020-05-05T06:51:13.626Z] DEBUG: [runtime-status] [36040] initializeApp(DEFAULT) {"databaseURL":"https://instatext-27374.firebaseio.com","storageBucket":"instatext-27374.appspot.com","projectId":"instatext-27374"}
+[warn] ⚠  functions: The Cloud Firestore emulator is not running, so calls to Firestore will affect production.
+[debug] [2020-05-05T06:51:13.782Z] DEBUG: [worker-~diagnostic~-b06a3990-5634-4548-8a79-3055809ffb61]: IDLE

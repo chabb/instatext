@@ -3,6 +3,7 @@ import {Twilio} from 'twilio';
 import {MessageInstance, MessageStatus} from "twilio/lib/rest/api/v2010/account/message";
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 import * as admin from 'firebase-admin';
+import {IncomingPhoneNumberInstance} from "twilio/lib/rest/api/v2010/account/incomingPhoneNumber";
 //import MessagingResponse = require("twilio/lib/twiml/MessagingResponse");
 //import * as cors from 'cors';
 
@@ -121,9 +122,29 @@ exports.createPhone = functions.https.onCall(({subAccountId}) => {
             return client.incomingPhoneNumbers(sid)
                 .update({accountSid: subAccountId})
         })
-        .then(incoming_phone_number => {
-            return incoming_phone_number.sid;
-        });
+        .then((incoming_phone_number: IncomingPhoneNumberInstance) => {
+            const phoneNumber = incoming_phone_number.phoneNumber;
+            db.collectionGroup('users').where('subAccountId', '==', subAccountId).get().then(function (querySnapshot) {
+                if (querySnapshot.size > 1) {
+                    throw new functions.https.HttpsError('internal', 'User with duplicate subaccount' + subAccountId);
+                } else {
+                    console.log('will update phone number of user with subaccount', subAccountId);
+                    querySnapshot.docs[0].ref.update({phoneNumber}).then(() => {
+                        console.log('user updated');
+                        return incoming_phone_number.phoneNumber;
+                    }, (e) => {
+                        console.log('error updating status', e);
+                    })
+                }
+            }, (e) => {
+                console.log('error finding message', e);
+            });
+
+        })
+        .then((phoneNumber) => {
+            console.log('success');
+            return {phoneNumber};
+        })
 });
 
 interface SubAccountResponse {

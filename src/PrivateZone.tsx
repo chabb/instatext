@@ -139,13 +139,13 @@ const _PrivateZone = () => {
                switch (currentApp.id) {
                    case FORM_ID.MESSAGE: {
                       form.validateFields().then(() => {
-                          sendMessageFlow(fb, form);
+                          sendMessageFlow(fb!, form);
                        });
                        break;
                    }
                    case FORM_ID.CONTACT: {
                        form.validateFields().then(() => {
-                           addContactFlow(fb, form, () => {
+                           addContactFlow(fb!, form, () => {
                                form.resetFields();
                                setModalVisible(false);
                            },)

@@ -13,3 +13,6 @@ firebase functions:config:set someservice.key="THE API KEY" someservice.id="THE 
 
 firebase deploy -P staging
 firebase deploy -P production
+
+#DONT BELIEVE .runtimeconfig.json it's there for informative purpose
+do firebase firebase functions:config:set twilio.token=<TOKEN>

@@ -6,6 +6,7 @@ import {DataContext} from "../PrivateZone";
 import {ITContact} from "../contacts/contact-table-definition";
 import FirebaseContext from "../firebase/context";
 import {useContacts} from "../firebase/hook";
+import Firebase from "../firebase/firebase";
 
 
 const { Option } = Select;
@@ -20,7 +21,6 @@ enum OptionType {
     id?: string,
     phoneNumber: string
 }
-
 
 const contacts: ItContact[] = [
     {name:'Robert', phoneNumber: '32443225', id:'1'},
@@ -85,14 +85,19 @@ const getIcon = type => {
 // we can send to a contact, a group, or a phone number
 // we'll get an array of
 
-export const sendMessageFlow = (fb, form): Promise<any> => {
+export const sendMessageFlow = (fb: Firebase, form): Promise<any> => {
     const {recipients, message } = form.getFieldsValue();
-
-    return fb!.sendSMSMessage('+19145590987', recipients[0], message)
+    console.log('will send message from', fb.currentUser!.phoneNumber, message, form.getFieldsValue());
+    return fb.sendSMSMessage(fb.currentUser!.phoneNumber, recipients[0], message)
         .then(
             (m) => {
                 console.log('sent message succesfully');
-                return fb!.addMessageToDb(m.from, recipients[0], message, m.id, m.status).then(() => {
+                return fb.addMessageToDb(m.from,
+                    recipients[0],
+                    message,
+                    m.id,
+                    m.status,
+                    fb!.currentUser!.subAccountId!).then(() => {
                     console.log('sent ms success', m);
                     notification.success({message: 'Message has been sent'});
                     return m;

@@ -32,18 +32,19 @@ export const SignIn:React.FC<any> = () => {
         setIsLoading(true);
         firebase!.doSignInWithEmailAndPassword(email, password)
             .then(user => {
-                console.log(user);
+                console.log('here', user);
                 if (!user) {
                     console.log('no user');
                 } else {
                     if (user.user!.emailVerified) {
-                        firebase!.currentUser = user.user;
+                        firebase!.currentUser = Object.assign(firebase!.currentUser, user.user);
                         history.push('/');
                     } else {
                         history.push('/email');
                     }
                 }
         }).catch(e => {
+            console.log(e);
             if (e && e.message) {
                 setErrorMessage(e.message);
             }

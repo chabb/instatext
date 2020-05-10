@@ -4,7 +4,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/functions";
 import {Collection} from "./db";
-import {BehaviorSubject, Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {ITContact} from "../contacts/contact-table-definition";
 import {SendMessageResponse} from "../../functions/src";
 import {MessageStatus} from "twilio/lib/rest/api/v2010/account/message";
@@ -13,6 +13,8 @@ interface User {
     uid: string,
     emailVerified: boolean,
     email: string | null;
+    phoneNumber: string;
+    subAccountId: string | null;
 }
 
 export class Firebase {
@@ -38,7 +40,7 @@ export class Firebase {
 
     sendSMSMessage = (from: string, to: string, message: string) => {
         const addMessage = firebase.functions().httpsCallable('sendMessage');
-        return addMessage({from, to, message}).then((result: firebase.functions.HttpsCallableResult) => {
+        return addMessage({from, to, message, subAccountId: this.currentUser!.subAccountId}).then((result: firebase.functions.HttpsCallableResult) => {
             const answer = result.data as SendMessageResponse;
             console.log('success', result);
             return answer;
@@ -46,6 +48,23 @@ export class Firebase {
             console.warn(e);
             return Promise.reject(e);
         });
+    };
+
+    createSubaccount = (name,id) => {
+        const createSubaccount = firebase.functions().httpsCallable('createSubaccount');
+        return createSubaccount({friendlyName:name, id});
+    };
+    createPhone = (subAccount) => {
+        return firebase.functions().httpsCallable('createPhone')({subAccountId: subAccount});
+    };
+
+    getMessage = (id = 'SMd2f5fe15b1d74086b87bd9acdaab9d1b') => {
+        console.log('get there ---');
+        const myReviews = firebase.firestore().collectionGroup('messages')
+            .where('sid', '==', id);
+        myReviews.get().then(function (querySnapshot) {
+            console.log('find', querySnapshot.size);
+        })
     };
 
 
@@ -81,6 +100,7 @@ export class Firebase {
             if (authUser) {
                 this.getUser(authUser.uid).get().then((doc) => {
                     const dbUser = doc.data();
+                    console.log('DBUSER', dbUser);
                     const user  = {
                         ...dbUser,
                         uid: authUser.uid,
@@ -107,27 +127,39 @@ export class Firebase {
     addContactToCurrentUser = (contact: ITContact) => {
         return this.addContactToUser(this.auth.currentUser!.uid, contact);
     };
-    addMessageToDb = (from: string, toPhoneNumber: string, message: string, sid: string, status: MessageStatus) => {
-        console.log('storing db', toPhoneNumber, message, sid);
+    addMessageToDb = (from: string, toPhoneNumber: string, message: string, messagesid: string, status: MessageStatus, subAccountId: string, contactName?: string) => {
+        console.log('storing db', toPhoneNumber, message, messagesid);
         // fetch the chatroom, if it does notexist, creates it
         const chat = this.db.collection(Collection.USERS)
             .doc(this.currentUser!.uid)
             .collection(Collection.CHATROOM)
             .doc(toPhoneNumber);
 
-        const saveMessage = () => chat.collection(Collection.MESSAGES).doc(sid).set({
+        const doc = {
             message,
             to: toPhoneNumber,
+            sid: messagesid,
             from,
-            status
-        });
+            createdAt: new Date().getTime(),
+            status,
+            subAccountId,
+            direction: 'outbound'};
+
+
+        console.log('---');
+        const saveMessage = () => Promise.all([
+            chat.collection(Collection.MESSAGES).doc(messagesid).set(doc),
+            chat.update({lastMessage: doc})
+        ]);
 
         return chat.get().then((d) => {
             console.log('Collection exists', d.exists);
                 if (d.exists) {
                     return saveMessage();
                 } else {
-                   return chat.set({contacts: toPhoneNumber}).then(() => {
+                   return chat.set({contacts: toPhoneNumber,
+                       contactName: contactName,
+                       subAccountId}).then(() => {
                        return saveMessage();
                    })
                 }
@@ -144,6 +176,13 @@ export class Firebase {
     getUserContact = () => {
         return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CONTACT);
     };
+    getUserChats = () => {
+        return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CHATROOM);
+    };
+    getUserChat = (to) => {
+        return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CHATROOM)
+            .doc(to).collection(Collection.MESSAGES);
+    };
     addContactToUser = (userUid: string, contact: ITContact) => {
         return this.db.collection(Collection.USERS).doc(userUid).collection(Collection.CONTACT)
             .doc(contact.phoneNumber).set(contact).then((d) => {
@@ -152,8 +191,10 @@ export class Firebase {
         }).catch((e) => { console.log(e); return Promise.reject(e);  });
     };
     getUser = (uid: string) => {
+        // subAccountId
         return this.db.collection('users').doc(uid);
     };
+
 }
 
 export default Firebase;

@@ -5,7 +5,6 @@ import {columns } from "./contact-table-definition";
 import { PlusOutlined } from '@ant-design/icons';
 import FirebaseContext from "../firebase/context";
 import {useContacts} from "../firebase/hook";
-import {NewMessage} from "../widgets/new_message";
 import {NewContact} from "../widgets/new_contact";
 
 

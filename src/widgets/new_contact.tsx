@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { Form, Input, notification} from "antd";
 import { PhoneOutlined, ContactsOutlined, TeamOutlined} from '@ant-design/icons';
 import {ModalProps} from "../constants";
@@ -11,6 +11,17 @@ import {ParseError, parsePhoneNumber, parsePhoneNumberFromString} from 'libphone
 
 export const NewContact: React.FC<ModalProps  & {contact?: string, phoneNumber?: string}> = ({onFinish, form, phoneNumber, contact}) => {
     const fb = useContext(FirebaseContext);
+
+    /**
+     *  This component is eagerly mounted
+     */
+    /*useEffect(() => {
+        console.log('mounted NEW CONTACT');
+            return () => {
+                console.log('unmounted NEW CONTACT');
+            }
+        }
+    );*/
 
     return (
         <>

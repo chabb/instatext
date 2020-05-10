@@ -35,12 +35,25 @@ export const SignUp:React.FC<any> = () => {
         firebase!
             .doCreateUserWithEmailAndPassword(email, password)
             .then(authUser => {
-                // Create a user in your Firebase realtime database
+                console.log('user created', authUser);
                 return firebase!.addUser({
-                    uid:authUser.user!.uid,
+                    uid: authUser.user!.uid,
                     email,
-                    emailVerified:false});
-            })
+                    emailVerified:false})
+                    .then(()=> firebase!.createSubaccount(email, authUser.user!.uid))
+                    .then(({data:{subAccountId}}) => {
+                        console.log('created subaccount -->', subAccountId, authUser.user!.uid);
+                        firebase!.currentUser!.subAccountId = subAccountId;
+                        return firebase!.getUser(authUser.user!.uid).update({subAccountId})
+                            .then((a) =>{
+                            console.log('updated', a);
+                            return subAccountId;
+                        }, (e) => console.log(e))
+                    }, (e) => console.log(e)).then(sub => {
+                        console.log('Creating subaccount', sub);
+                        return firebase!.createPhone(sub);
+                    })
+                })
             .then(() => {
                 firebase!.doSendEmailVerification();
             })

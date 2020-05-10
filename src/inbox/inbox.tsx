@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {Table, Input, Drawer} from "antd";
 import {columns, generateFakeData} from "./message-table-definition";
-import FirebaseContext from "../firebase/context";
+import {useChats } from "../firebase/hook";
 
 const { Search } = Input;
 
@@ -9,7 +9,7 @@ export const Inbox = () => {
     //const fb = useContext(FirebaseContext);
     const [isDrawerVisible, setDrawerVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState<any>(null);
-    const [data, setData] = useState(generateFakeData(10));
+    const chats = useChats();
 
     return (
     <div className='inbox'>
@@ -25,7 +25,7 @@ export const Inbox = () => {
                        setDrawerVisible(true);
                    },
                })}
-               dataSource={data}
+               dataSource={chats}
                onChange={() => {}} />
         <Drawer
             title={`Message with ${selectedRow && selectedRow.recipients}`}

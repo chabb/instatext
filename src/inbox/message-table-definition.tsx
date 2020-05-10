@@ -9,9 +9,14 @@ const formatTime = timeFormat("%B %d, %Y");
 
 export const columns: ColumnProps<ITMessage>[] = [
     {
-        title: 'Recipients',
-        dataIndex: 'recipients',
-        width: '20%'
+        title: 'sent',
+        width: '20%',
+        dataIndex: 'createdAt',
+        render: (value, record) => formatTime(record.ts),
+        sorter: {
+            compare: (a, b) => a.ts - b.ts,
+            multiple: 2,
+        },
     },
     {
         title: 'Message',
@@ -23,18 +28,12 @@ export const columns: ColumnProps<ITMessage>[] = [
         }
     },
     {
-        title: 'sent',
-        width: '20%',
-        dataIndex: 'timestamp',
-        render: (value, record) => formatTime(record.timestamp),
-        sorter: {
-            compare: (a, b) => a.timestamp - b.timestamp,
-            multiple: 2,
-        },
-    }
+        title: 'Recipient',
+        dataIndex: 'to',
+        width: '20%'
+    },
+
 ];
-
-
 
 interface Keyed {
     key: string
@@ -47,7 +46,8 @@ export function generateFakeData(length: number): (ITMessage & Keyed)[] {
         const message = randomWords({ min: 5, max: 30 }).join(' ');
         const timestamp = randomTimeStamp() * 1000;
         const key = i.toString();
-        a.push({key, recipients, message, timestamp});
+
+        //a.push({key, recipients, message, timestamp});
     }
     return a;
 }

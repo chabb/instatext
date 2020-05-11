@@ -1,0 +1,26 @@
+@import "../mixins";
+
+.messages {
+  .flex(column);
+
+  .outbound-message, .inbound-message {
+    margin: 0 0 10px 0;
+  }
+
+  .outbound-message {
+    .flex(column);
+    div {
+      .flex(row);
+      justify-content: flex-end;
+    }
+
+  }
+
+  .inbound-message {
+    .flex(column);
+    div {
+      .flex(row);
+      justify-content: flex-start
+    }
+  }
+}

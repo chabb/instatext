@@ -1,10 +1,15 @@
 import React, {useContext, useRef, useState} from 'react'
 import {Table, Input, Drawer} from "antd";
-import {columns, generateFakeData} from "./message-table-definition";
+import {columns} from "./message-table-definition";
 import {useChats } from "../firebase/hook";
 import {MessageDirection} from "../firebase/data-context";
 import {DataContext} from "../PrivateZone";
-import {takeUntil, takeWhile} from "rxjs/operators";
+import {takeWhile} from "rxjs/operators";
+import { timeFormat} from 'd3-time-format';
+import './messages.less'
+
+const formatTime = timeFormat("%B %d, %Y  %H:%M");
+
 
 const { Search } = Input;
 
@@ -12,11 +17,32 @@ export const Inbox = () => {
     //const fb = useContext(FirebaseContext);
     const [isDrawerVisible, setDrawerVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState<any>(null);
-    const subs = useRef();
-
+    const [messages, setMessages] = useState<any>([]);
+    const drawer = useRef(false);
     const chats = useChats();
-
     const data = useContext(DataContext); // make something similar as useChats
+    const _onclick = (record) => {
+            setSelectedRow(record);
+            let number;
+            if ((record as any).direction === MessageDirection.INBOUND) {
+                number = record.from;
+            } else {
+                number = record.to;
+            }
+
+            drawer.current = true;
+            data.startChatSnapshot(number);
+            console.log('is ---', drawer.current);
+            data.chat.pipe(takeWhile(() => drawer.current))
+                .subscribe((v) => {
+                    console.log('------>');
+                    setMessages(v);
+                });
+            //TODO(chab) use loading indicator instead
+            setTimeout(() => {
+                setDrawerVisible(true);
+            }, 50)
+        };
 
     return (
     <div className='inbox'>
@@ -26,37 +52,33 @@ export const Inbox = () => {
             size="large"
             onSearch={value => console.log(value)}/>
         <Table columns={columns}
-               onRow={(record: any) => ({ // TODO go back to ITMessage
-                   onClick: () => {
-                       console.log('row selected', record);
-                       setSelectedRow(record);
-                       let number;
-                       if ((record as any).direction === MessageDirection.INBOUND) {
-                           number = record.from;
-                       } else {
-                           number = record.to;
-                       }
-                       data.startChatSnapshot(number);
-                       setDrawerVisible(true);
-                       data.chat.pipe(takeWhile(() => isDrawerVisible))
-                           .subscribe((v) => {
-                               console.log('stuff', v);
-                            });
-                   },
-               })}
                dataSource={chats}
-               onChange={() => {}} />
+               onChange={() => {}}
+               onRow={(record: any) => ({ // TODO go back to ITMessage
+                   onClick: () => _onclick(record) })} />
         <Drawer
             title={`Message with ${selectedRow && selectedRow.recipients}`}
             placement="right"
             closable={false}
             width={'40%'}
-            onClose={() => setDrawerVisible(false)}
+            onClose={() => {
+                console.log('close');
+                drawer.current = false;
+                setDrawerVisible(false);
+                setMessages([]);
+            }}
             visible={isDrawerVisible}
         >
-            {selectedRow && selectedRow!.message}
-        </Drawer>
+            {(messages || []).map(m =>
+                <div className='messages' key={m.sid}>
 
+                        <div className={`${m.direction}-message`}>
+                            <div>{m.message}</div>
+                            <div>{formatTime(m.ts)}</div>
+                        </div>
+                </div>
+            )}
+        </Drawer>
     </div>);
 }
 

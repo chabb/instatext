@@ -181,7 +181,7 @@ export class Firebase {
     };
     getUserChat = (to) => {
         return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CHATROOM)
-            .doc(to).collection(Collection.MESSAGES);
+            .doc(to).collection(Collection.MESSAGES).orderBy("createdAt")
     };
     addContactToUser = (userUid: string, contact: ITContact) => {
         return this.db.collection(Collection.USERS).doc(userUid).collection(Collection.CONTACT)

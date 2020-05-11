@@ -30,7 +30,8 @@ export const columns: ColumnProps<ITMessage>[] = [
     {
         title: 'Recipient',
         dataIndex: 'to',
-        width: '20%'
+        width: '20%',
+        render: (value, record: any) => record.direction === 'inbound' ? record.from : record.to
     },
 
 ];

@@ -54,6 +54,7 @@ export class Data {
             console.log(querySnaphost.size);
             querySnaphost.forEach(q => {
                 chats.push({
+                    sid: q.data().sid,
                     key: q.data().from,
                     from: q.data().from,
                     to: q.data().to,

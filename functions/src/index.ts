@@ -79,7 +79,7 @@ exports.createSubaccount = functions.https.onCall(({friendlyName, userId}, conte
     const token = functions.config().twilio.token;
     const client = new Twilio(sid, token);
     console.log('Create subaccount for', friendlyName, userId);
-    return client.api.accounts.create({friendlyName: 'Submarine'})
+    return client.api.accounts.create({friendlyName})
         .then(account => {
             console.log('created account', account);
             return {subAccountId:account.sid}

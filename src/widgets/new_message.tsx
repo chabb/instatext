@@ -85,9 +85,9 @@ const getIcon = type => {
 // we can send to a contact, a group, or a phone number
 // we'll get an array of
 
-export const sendMessageFlow = (fb: Firebase, form): Promise<any> => {
+export const sendMessageFlow = (fb: Firebase, form, contactDico): Promise<any> => {
     const {recipients, message } = form.getFieldsValue();
-    console.log('will send message from', fb.currentUser!.phoneNumber, message, form.getFieldsValue());
+    console.log('will send message from', fb.currentUser!.phoneNumber, message, form.getFieldsValue(), contactDico);
     return fb.sendSMSMessage(fb.currentUser!.phoneNumber, recipients[0], message)
         .then(
             (m) => {
@@ -97,7 +97,8 @@ export const sendMessageFlow = (fb: Firebase, form): Promise<any> => {
                     message,
                     m.id,
                     m.status,
-                    fb!.currentUser!.subAccountId!).then(() => {
+                    fb!.currentUser!.subAccountId!,
+                    contactDico[recipients[0]]).then(() => {
                     console.log('sent ms success', m);
                     notification.success({message: 'Message has been sent'});
                     return m;

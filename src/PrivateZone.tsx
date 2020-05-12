@@ -2,7 +2,7 @@ import {Button, Layout, Modal, Menu, Form} from "antd";
 import {Link, NavLink, Redirect, Route, Switch, useLocation} from "react-router-dom";
 import {Inbox} from "./inbox/inbox";
 import {Contact} from "./contacts/contact";
-import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useContext, useEffect, useMemo, useRef, useState} from "react";
 import { UploadOutlined, UserOutlined, VideoCameraOutlined, PlusOutlined } from '@ant-design/icons';
 import {addContactFlow, NewContact} from "./widgets/new_contact";
 import {NewMessage, sendMessageFlow} from "./widgets/new_message";
@@ -43,6 +43,22 @@ const _PrivateZone = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const fb = useContext(FirebaseContext);
     const location = useLocation();
+    const data = useContext(DataContext); // make something similar as useChats
+    const contactsDico = useRef({});
+
+    const [isFormLoading, setFormLoading] = useState(false);
+
+    useEffect(() => {
+        const sub = data.contacts.subscribe((v) => {
+            contactsDico.current = v.reduce((acc, contact) => {
+                acc[contact.phoneNumber] = contact;
+                return acc;
+            }, {});
+        });
+        return () => {
+            sub.unsubscribe();
+        }
+    });
 
     const getApp = useCallback((pathname) => {
         switch (pathname) {
@@ -133,24 +149,36 @@ const _PrivateZone = () => {
             visible={modalVisible}
             forceRender={true}
             okText={currentApp.id === FORM_ID.CONTACT ? 'Create contact' : 'Send message'}
-            okButtonProps={ {}/* TODO */}
-
+            okButtonProps={ {loading: isFormLoading}}
             onOk={() => {
                switch (currentApp.id) {
                    case FORM_ID.MESSAGE: {
                       form.validateFields().then(() => {
-                          sendMessageFlow(fb!, form);
+                          setFormLoading(true);
+                          sendMessageFlow(fb!, form, contactsDico.current).then(() => {
+                              console.log('message sent');
+                              setFormLoading(false);
+                              setModalVisible(false);
+                          }, (e) => {
+                              console.log(e);
+                              setFormLoading(false);
+                              // sending message failed
+                          })
                        });
                        break;
                    }
                    case FORM_ID.CONTACT: {
+
                        form.validateFields().then(() => {
+                           setFormLoading(true);
                            addContactFlow(fb!, form, () => {
                                form.resetFields();
+                               setFormLoading(false);
                                setModalVisible(false);
                            },)
                        }, (i) => {
-                           console.log('fa', i);
+                           setFormLoading(false);
+                           console.log('failed to created contact', i);
                        });
                        break;
                    }

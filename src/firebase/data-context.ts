@@ -31,14 +31,19 @@ export class Data {
             const chats = [] as any[];
             querySnaphost.forEach(q => {
                 const lastMessage = q.data().lastMessage;
-                console.log(lastMessage);
-                chats.push({
-                    key: lastMessage.from,
-                    from: lastMessage.from,
-                    to: lastMessage.to,
-                    direction: lastMessage.direction,
-                    message: lastMessage.message,
-                    ts: lastMessage.createdAt})
+                console.log('LM', lastMessage);
+                if (lastMessage) {
+                    chats.push({
+                        key: lastMessage.from,
+                        from: lastMessage.from,
+                        to: lastMessage.to,
+                        direction: lastMessage.direction,
+                        message: lastMessage.message,
+                        ts: lastMessage.createdAt})
+                } else {
+                    console.warn('empty message');
+                }
+
             });
             this.chats.next(chats);
         })

@@ -151,11 +151,9 @@ interface SubAccountResponse {
 }
 
 
-// [START trigger]
 //https://us-central1-instatext-27374.cloudfunctions.net/webhook
 exports.webhook = functions.https.onRequest((req, res) => {
-    // [END trigger]
-    // [START sendError]
+
     // Forbidding PUT requests.
     console.log('received request');
     if (req.method === 'GET' || req.method === 'PUT' || req.method === 'DELETE' ) {
@@ -164,7 +162,7 @@ exports.webhook = functions.https.onRequest((req, res) => {
     // [END sendError]
     // [START usingMiddleware]
     // Enable CORS using the `cors` express middleware.
-    console.log('will response the thing', req.body);
+    console.log('webhook body', req.body);
     //    SmsStatus: 'delivered',
     //    MessageStatus: 'delivered',
     //    To: '+41798843958',
@@ -178,6 +176,7 @@ exports.webhook = functions.https.onRequest((req, res) => {
     const msStatus = req.body.messageStatus;
     const to = req.body.To;
     const id = req.body.MessageSid;
+    const accountSid = req.body.AccountSid;
 
     return cors(req, res, () => {
         // [END usingMiddleware]
@@ -201,7 +200,31 @@ exports.webhook = functions.https.onRequest((req, res) => {
         }, (e) => {
             console.log('error finding message', e);
         });
-        res.status(200).send('hello');
+        const room = db.collectionGroup('chatroom')
+            .where('subAccountId', '==', accountSid as string)
+            .where('contacts', '==', to);
+        console.log('FROM', to, 'ACCOUNT', accountSid);
+
+        room.get().then((querySnapshot) => {
+            console.log('SIZE', querySnapshot.size);
+            if (querySnapshot.size > 1) {
+                throw new functions.https.HttpsError('internal', 'Duplicate chatroom for subaccount' + accountSid + '/' + from);
+            } else {
+                const lastMessage = querySnapshot.docs[0].data().lastMessage;
+                console.log('find last message', lastMessage, 'current id', id);
+                if (lastMessage.sid === id) {
+                    console.log('last message need to be updated');
+                    querySnapshot.docs[0].ref.update({['lastMessage.status']: status}).then(() => {
+                        console.log('success updati')
+                    }, (e) => console.error(e))
+                }
+            }
+        }, (e) => {
+            console.log('failed to find chatroom', e);
+        });
+
+
+        res.status(200).send('done');
         // [END sendResponse]
     });
 });

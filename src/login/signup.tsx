@@ -3,6 +3,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import {Link, useHistory} from "react-router-dom";
 import {SignUpLink} from "./signin";
 import FirebaseContext from "../firebase/context";
+import {User} from "firebase";
 
 
 const layout = {
@@ -37,7 +38,7 @@ export const SignIn:React.FC<any> = () => {
                     console.log('no user');
                 } else {
                     if (user.user!.emailVerified) {
-                        firebase!.currentUser = Object.assign(firebase!.currentUser, user.user);
+                        firebase!.currentUser = Object.assign(firebase!.currentUser || ({} as any), user.user);
                         history.push('/');
                     } else {
                         history.push('/email');

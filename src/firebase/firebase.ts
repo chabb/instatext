@@ -190,6 +190,14 @@ export class Firebase {
             return d;
         }).catch((e) => { console.log(e); return Promise.reject(e);  });
     };
+    deleteContact = (userUid: string, contactPhoneNumber: string) => {
+        return this.db
+            .collection(Collection.USERS)
+            .doc(userUid)
+            .collection(Collection.CONTACT)
+            .doc(contactPhoneNumber)
+            .delete().catch((e) => { console.log(e); return Promise.reject(e);  });
+    };
     getUser = (uid: string) => {
         // subAccountId
         return this.db.collection('users').doc(uid);

@@ -4,6 +4,9 @@ import randomTimeStamp from 'random-timestamps';
 import randomWords from 'random-words';
 import { names } from 'unique-names-generator';
 import { timeFormat} from 'd3-time-format';
+import React from 'react';
+import { CloseCircleOutlined, CheckOutlined, DashOutlined, QuestionCircleOutlined} from '@ant-design/icons';
+import {SmsAttributes} from "twilio/lib/twiml/VoiceResponse";
 
 const formatTime = timeFormat("%B %d, %Y");
 
@@ -33,8 +36,38 @@ export const columns: ColumnProps<ITMessage>[] = [
         width: '20%',
         render: (value, record: any) => record.direction === 'inbound' ? record.from : record.to
     },
+    {
+        title: 'Status',
+        dataIndex: 'status',
+        width: '10%',
+        render: (value, record: any) => getIcon(value)
+
+    },
 
 ];
+
+function getIcon(value) {
+    if (value === 'queued') {
+        return <DashOutlined />
+    }
+    if (value === 'delivered') {
+        return <CheckOutlined/>
+    }
+    if (value === 'undelivered') {
+        return <CloseCircleOutlined />
+    }
+    if (value === 'sent') {
+        return (<>
+            <CheckOutlined />
+            <CheckOutlined />
+            </>);
+
+    }
+    if (value === 'failed') {
+        return <CloseCircleOutlined />
+    }
+   return <QuestionCircleOutlined/>
+}
 
 interface Keyed {
     key: string

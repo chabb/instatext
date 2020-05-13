@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import {Table, Input, Drawer, Form} from "antd";
+import {Table, Input, Drawer, Form, Button, notification} from "antd";
 import {columns } from "./contact-table-definition";
 
 import { PlusOutlined } from '@ant-design/icons';
@@ -13,10 +13,11 @@ import {NewContact} from "../widgets/new_contact";
 const { Search } = Input;
 export const Contact = () => {
     const [selectedRow, setSelectedRow] = useState<any>(null);
-    const fb = useContext(FirebaseContext);
+    const fb = useContext(FirebaseContext)!;
     const [isDrawerVisible, setDrawerVisible] = useState(false);
     const contacts = useContacts();
     const [form] = Form.useForm();
+    const [deleteLoading, setDeleteLoading] = useState(false);
 
     return (
         <div className='contact'>
@@ -53,6 +54,17 @@ export const Contact = () => {
                         console.log('done');
                     }}
                     phoneNumber={selectedRow ? selectedRow.phoneNumber : null} contact={selectedRow ? selectedRow.contact: ''} />
+
+                <Button type="primary" danger onClick={() => {
+                    setDeleteLoading(true);
+                    fb.deleteContact(fb.currentUser!.uid, selectedRow.phoneNumber).then(() => {
+                        setDrawerVisible(false);
+                        notification.success({message:'Contact successfully deleted'});
+                    }, () => {
+                        notification.error({message:'Contact could not be deleted'});
+                    }).finally(() => setDeleteLoading(false))
+                }}> Delete
+                </Button>
             </Drawer>
         </div>);
 }

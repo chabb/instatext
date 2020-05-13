@@ -140,6 +140,7 @@ export class Firebase {
             to: toPhoneNumber,
             sid: messagesid,
             from,
+            pristine: true,
             createdAt: new Date().getTime(),
             status,
             subAccountId,

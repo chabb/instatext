@@ -269,6 +269,7 @@ exports.incoming = functions.https.onRequest((req, res) => {
                 sid: MessageSid,
                 from: From,
                 createdAt: new Date().getTime(),
+                pristine: true,
                 status,
                 subAccountId: AccountSid,
                 direction: 'inbound'

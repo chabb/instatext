@@ -5,7 +5,7 @@ import randomWords from 'random-words';
 import { names } from 'unique-names-generator';
 import { timeFormat} from 'd3-time-format';
 import React from 'react';
-import { CloseCircleOutlined, CheckOutlined, DashOutlined, QuestionCircleOutlined} from '@ant-design/icons';
+import { CloseCircleOutlined, CheckOutlined, DashOutlined, QuestionCircleOutlined, RollbackOutlined} from '@ant-design/icons';
 import {SmsAttributes} from "twilio/lib/twiml/VoiceResponse";
 
 const formatTime = timeFormat("%B %d, %Y");
@@ -50,17 +50,24 @@ function getIcon(value) {
     if (value === 'queued') {
         return <DashOutlined />
     }
-    if (value === 'delivered') {
+    if (value === 'sent') {
         return <CheckOutlined/>
     }
     if (value === 'undelivered') {
         return <CloseCircleOutlined />
     }
-    if (value === 'sent') {
+    if (value === 'delivered') {
         return (<>
             <CheckOutlined />
             <CheckOutlined />
             </>);
+
+    }
+    if (value === 'received') {
+        return (<>
+            <RollbackOutlined />
+            <CheckOutlined />
+        </>);
 
     }
     if (value === 'failed') {

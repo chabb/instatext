@@ -269,14 +269,22 @@ exports.incoming = functions.https.onRequest((req, res) => {
                 sid: MessageSid,
                 from: From,
                 createdAt: new Date().getTime(),
-                pristine: true,
                 status,
                 subAccountId: AccountSid,
                 direction: 'inbound'
             };
 
-            return Promise.all([querySnapshot.docs[0].ref.collection('messages').doc(MessageSid).set(message),
-                querySnapshot.docs[0].ref.update({lastMessage: message})]);
+            return Promise.all([
+                querySnapshot.docs[0].ref.collection('messages').doc(MessageSid).set(message),
+                querySnapshot.docs[0].get('lastMessage').then((lastMessage: any) => {
+                    console.log('should update count', lastMessage);
+                    const lastMessagePristineCount = (lastMessage.pristine ? lastMessage.pristine : 0) + 1;
+                    const m = Object.assign({...message}, {pristine: lastMessagePristineCount} );
+                    console.log('updated last message', m);
+                    return querySnapshot.docs[0].ref.update({lastMessage: m}).then(() =>{
+                        console.log('updated last message successfully');
+                    });
+                })]);
         }
     }, (e) => {
         console.log('error finding message', e);
@@ -289,6 +297,13 @@ exports.incoming = functions.https.onRequest((req, res) => {
     });
     // find message subcollection
     // Send the response
+
+
+
+    // Note on count implementation, we can simply use the pristine field to show the number of unread message
+    //const shard_ref = ref.collection('shards').doc(shard_id);
+    // Update count
+    //return shard_ref.update("count", firebase.firestore.FieldValue.increment(1));
 });
 
 // [END all]

@@ -37,6 +37,7 @@ export class Data {
                         key: lastMessage.from,
                         from: lastMessage.from,
                         to: lastMessage.to,
+                        pristine: lastMessage.pristine ? lastMessage.pristine : 0,
                         status: lastMessage.status,
                         direction: lastMessage.direction,
                         message: lastMessage.message,

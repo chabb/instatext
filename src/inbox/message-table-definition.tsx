@@ -1,4 +1,5 @@
 import {ColumnProps} from "antd/lib/table";
+import { Badge } from 'antd';
 import {ITMessage} from "../constants";
 import randomTimeStamp from 'random-timestamps';
 import randomWords from 'random-words';
@@ -6,7 +7,7 @@ import { names } from 'unique-names-generator';
 import { timeFormat} from 'd3-time-format';
 import React from 'react';
 import { CloseCircleOutlined, CheckOutlined, DashOutlined, QuestionCircleOutlined, RollbackOutlined} from '@ant-design/icons';
-import {SmsAttributes} from "twilio/lib/twiml/VoiceResponse";
+
 
 const formatTime = timeFormat("%B %d, %Y");
 
@@ -40,7 +41,11 @@ export const columns: ColumnProps<ITMessage>[] = [
         title: 'Status',
         dataIndex: 'status',
         width: '10%',
-        render: (value, record: any) => getIcon(value)
+        render: (value, record: any) =>
+            (<>
+                {getIcon(value) }
+                <Badge count={record.pristine}/>
+            </>)
 
     },
 

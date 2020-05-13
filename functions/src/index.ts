@@ -273,18 +273,16 @@ exports.incoming = functions.https.onRequest((req, res) => {
                 subAccountId: AccountSid,
                 direction: 'inbound'
             };
-
+            const lastMessage = querySnapshot.docs[0].data().lastMessage;
+            const lastMessagePristineCount = (lastMessage.pristine ? lastMessage.pristine : 0) + 1;
+            const m = Object.assign({...message}, {pristine: lastMessagePristineCount} );
+            console.log('should update count', lastMessage);
+            console.log('updated last message', m);
             return Promise.all([
                 querySnapshot.docs[0].ref.collection('messages').doc(MessageSid).set(message),
-                querySnapshot.docs[0].get('lastMessage').then((lastMessage: any) => {
-                    console.log('should update count', lastMessage);
-                    const lastMessagePristineCount = (lastMessage.pristine ? lastMessage.pristine : 0) + 1;
-                    const m = Object.assign({...message}, {pristine: lastMessagePristineCount} );
-                    console.log('updated last message', m);
-                    return querySnapshot.docs[0].ref.update({lastMessage: m}).then(() =>{
+                querySnapshot.docs[0].ref.update({lastMessage: m}).then(() =>{
                         console.log('updated last message successfully');
-                    });
-                })]);
+                    })]);
         }
     }, (e) => {
         console.log('error finding message', e);

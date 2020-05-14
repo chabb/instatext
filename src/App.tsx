@@ -6,7 +6,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useLocation
+    useLocation, Redirect
 } from 'react-router-dom';
 import FirebaseContext  from './firebase/context';
 import Firebase from "./firebase/firebase";
@@ -47,15 +47,16 @@ function Body() {
 
     useEffect(() => {
         const s = firebase!.sessionInitialized.subscribe((v) => {
-            console.log('session started', v);
+            console.log('session started', v, sessionLoaded, firebase!.auth.currentUser);
             if (v !== sessionLoaded) {
+                console.log('switching');
                 setSessionLoaded(v);
             }
         });
         return () => s.unsubscribe();
     },[]);
 
-    return hasSession(sessionLoaded, firebase) ? (
+    return sessionLoaded ? (
         <div className='app'>
             {isLoginZone ?
                 <div className='logger'>
@@ -72,8 +73,13 @@ function Body() {
                     </Switch>
                 </div>
                 :
-                (firebase!.auth.currentUser ?
-               <PrivateZone/> : <Spin size="large" tip="Loading..."/> )}
+                (!!firebase!.auth.currentUser ?
+               <PrivateZone/> :  <Redirect
+                        to={{
+                            pathname: "/signup",
+                            state: {from: location}
+                        }}
+                    /> )}
 
         </div>)  : <Spin size="large" tip="Loading..."/>
 }

@@ -43,7 +43,7 @@ export const columns: ColumnProps<ITMessage>[] = [
         width: '10%',
         render: (value, record: any) =>
             (<>
-                {getIcon(value) }
+                {getMessageStatusIcon(value) }
                 <Badge count={record.pristine}/>
             </>)
 
@@ -51,7 +51,7 @@ export const columns: ColumnProps<ITMessage>[] = [
 
 ];
 
-function getIcon(value) {
+export function getMessageStatusIcon(value) {
     if (value === 'queued') {
         return <DashOutlined />
     }

@@ -65,6 +65,7 @@ export class Data {
                     key: q.data().from,
                     from: q.data().from,
                     to: q.data().to,
+                    status: q.data().status,
                     direction: q.data().direction,
                     message: q.data().message,
                     ts: q.data().createdAt})

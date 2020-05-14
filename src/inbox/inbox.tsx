@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
 import {Table, Input, Drawer} from "antd";
-import {columns} from "./message-table-definition";
+import {columns, getMessageStatusIcon} from "./message-table-definition";
 import {useChats, useContacts} from "../firebase/hook";
 import {MessageDirection} from "../firebase/data-context";
 import {DataContext} from "../PrivateZone";
@@ -95,7 +95,7 @@ export const Inbox = () => {
                 <div className='messages' key={m.sid}>
 
                         <div className={`${m.direction}-message`}>
-                            <div>{m.message}</div>
+                            <div>{m.message}  {m.direction === 'outbound' && getMessageStatusIcon(m.status)} </div>
                             <div>{formatTime(m.ts)}</div>
                         </div>
                 </div>

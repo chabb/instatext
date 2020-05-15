@@ -7,16 +7,18 @@ import { names } from 'unique-names-generator';
 import { timeFormat} from 'd3-time-format';
 import React from 'react';
 import { CloseCircleOutlined, CheckOutlined, DashOutlined, QuestionCircleOutlined, RollbackOutlined} from '@ant-design/icons';
+import {isToday} from "../utils";
 
 
 const formatTime = timeFormat("%B %d, %Y");
+const todayFormatTime = timeFormat('Today, %H:%M')
 
 export const columns: ColumnProps<ITMessage>[] = [
     {
         title: 'sent',
         width: '20%',
         dataIndex: 'createdAt',
-        render: (value, record) => formatTime(record.ts),
+        render: (value, record) => isToday(record.ts) ? todayFormatTime(record.ts) : formatTime(record.ts),
         sorter: {
             compare: (a, b) => a.ts - b.ts,
             multiple: 2,

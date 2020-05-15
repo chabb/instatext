@@ -80,7 +80,7 @@ export const Inbox = () => {
                onRow={(record: any) => ({ // TODO go back to ITMessage
                    onClick: () => _onclick(record) })} />
         <Drawer
-            title={`Message with ${contact.current.contact}`}
+            title={`Message with ${selectedRow ? selectedRow.contactName : ''}`}
             placement="right"
             closable={false}
             width={'40%'}

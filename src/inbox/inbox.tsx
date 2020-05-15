@@ -96,8 +96,15 @@ export const Inbox = () => {
                 <div className='messages' key={m.sid}>
 
                         <div className={`${m.direction}-message`}>
-                            <div>{m.message}  {m.direction === 'outbound' && getMessageStatusIcon(m.status)} </div>
-                            <div>{formatTime(m.ts)}</div>
+                            <div>
+                                {m.direction === 'inbound' && <b> {selectedRow.contactName}&nbsp;-&nbsp; </b>}
+                                <span className="ts"> {formatTime(m.ts)} </span>
+                            </div>
+                            <div>
+                                {m.message}
+                                {m.direction === 'outbound' && getMessageStatusIcon(m.status)}
+                            </div>
+
                         </div>
                 </div>
             )}

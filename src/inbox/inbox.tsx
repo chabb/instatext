@@ -117,10 +117,11 @@ export const Inbox = () => {
                 placeholder={isLoading ? 'Sending Message' : 'Write a message'} allowClear
                       onPressEnter={(e) => {
                           setIsLoading(true);
+                          const value = (e.target as any).value;
                           sendMessageFlow(fb, {
                               recipients:[selectedRow.contactName],
                               recipientNumbers: [selectedRow.contactNumber],
-                              message:(e.target as any).value}, null).then((i) => {
+                              message:value}, null).then((i) => {
                                   console.log(i);
                           }, (e) => {
                                   console.error(e);

@@ -8,6 +8,7 @@ import {addContactFlow, NewContact} from "./widgets/new_contact";
 import {NewMessage, sendMessageFlow} from "./widgets/new_message";
 import FirebaseContext from "./firebase/context";
 import {Data} from "./firebase/data-context";
+import {Admin} from "./admin/admin";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -136,6 +137,10 @@ const _PrivateZone = () => {
                         <PrivateRoute path="/contact">
                             <Contact />
                         </PrivateRoute>
+                        <PrivateRoute path="/admin">
+                            <Admin />
+                        </PrivateRoute>
+
                         <PrivateRoute path="/">
                             <div> HOME </div>
                         </PrivateRoute>

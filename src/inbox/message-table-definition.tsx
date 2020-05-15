@@ -11,7 +11,7 @@ import {isToday} from "../utils";
 
 
 const formatTime = timeFormat("%B %d, %Y");
-const todayFormatTime = timeFormat('Today, %H:%M')
+const todayFormatTime = timeFormat('Today, %I:%M %p')
 
 export const columns: ColumnProps<ITMessage>[] = [
     {
@@ -37,7 +37,7 @@ export const columns: ColumnProps<ITMessage>[] = [
         title: 'Recipient',
         dataIndex: 'to',
         width: '20%',
-        render: (value, record: any) => record.direction === 'inbound' ? record.from : record.to
+        render: (value, record: any) => record.direction === 'inbound' ? record.contactName : record.contactName
     },
     {
         title: 'Status',

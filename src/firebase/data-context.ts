@@ -41,6 +41,7 @@ export class Data {
                         status: lastMessage.status,
                         direction: lastMessage.direction,
                         message: lastMessage.message,
+                        contactName: q.data().contactName.contact,
                         ts: lastMessage.createdAt})
                 } else {
                     console.warn('empty message');

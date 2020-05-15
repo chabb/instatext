@@ -15,12 +15,12 @@ export const useContacts = (mapFunction = id => id) => {
 
 export const useChats = (mapFunction = id => id) => {
     const data = useContext(DataContext);
-    const [contacts, setContacts] = useState<any[]>([] as any[]);
+    const [chats, setChats] = useState<any[]>([] as any[]);
     useEffect(() => {
-        const subscription = data.chats.subscribe((contacts) => {
-            setContacts(mapFunction(contacts));
+        const subscription = data.chats.subscribe((chats) => {
+            setChats(mapFunction(chats));
         });
         return () => subscription.unsubscribe();
     }, []);
-    return contacts;
+    return chats;
 };

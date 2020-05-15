@@ -27,6 +27,7 @@ export const Contact = () => {
                 size="large"
                 onSearch={value => console.log(value)}/>
             <Table columns={columns}
+                   showHeader={false}
                    onRow={(record) => ({
                        onClick: () => {
                            setSelectedRow(record);

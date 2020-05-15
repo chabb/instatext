@@ -74,6 +74,7 @@ export const Inbox = () => {
             size="large"
             onSearch={value => console.log(value)}/>
         <Table columns={columns}
+               showHeader={false}
                dataSource={chats}
                onChange={() => {}}
                onRow={(record: any) => ({ // TODO go back to ITMessage

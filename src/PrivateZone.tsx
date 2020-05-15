@@ -155,7 +155,7 @@ const _PrivateZone = () => {
                    case FORM_ID.MESSAGE: {
                       form.validateFields().then(() => {
                           setFormLoading(true);
-                          sendMessageFlow(fb!, form, contactsDico.current).then(() => {
+                          sendMessageFlow(fb!, form.getFieldsValue() as any, contactsDico.current).then(() => {
                               console.log('message sent');
                               setFormLoading(false);
                               setModalVisible(false);

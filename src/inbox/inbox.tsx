@@ -7,16 +7,19 @@ import {DataContext} from "../PrivateZone";
 import {takeWhile} from "rxjs/operators";
 import { timeFormat} from 'd3-time-format';
 import './messages.less'
+import {sendMessageFlow} from "../widgets/new_message";
+import FirebaseContext from "../firebase/context";
 
 const formatTime = timeFormat("%B %d, %Y  %H:%M");
 
 
-const { Search } = Input;
+const { Search, TextArea } = Input;
 
 export const Inbox = () => {
-    //const fb = useContext(FirebaseContext);
+    const fb = useContext(FirebaseContext)!;
     const contacts = useContacts();
 
+    const [isLoading, setIsLoading] = useState(false);
     const [isDrawerVisible, setDrawerVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState<any>(null);
     const [messages, setMessages] = useState<any>([]);
@@ -83,6 +86,7 @@ export const Inbox = () => {
             title={`Message with ${selectedRow ? selectedRow.contactName : ''}`}
             placement="right"
             closable={false}
+            className='message-drawer'
             width={'40%'}
             onClose={() => {
                 console.log('close');
@@ -108,6 +112,20 @@ export const Inbox = () => {
                         </div>
                 </div>
             )}
+            <TextArea disabled={isLoading}
+                style={{marginTop: 'auto'}}
+                placeholder={isLoading ? 'Sending Message' : 'Write a message'} allowClear
+                      onPressEnter={(e) => {
+                          setIsLoading(true);
+                          sendMessageFlow(fb, {
+                              recipients:[selectedRow.contactName],
+                              recipientNumbers: [selectedRow.contactNumber],
+                              message:(e.target as any).value}, null).then((i) => {
+                                  console.log(i);
+                          }, (e) => {
+                                  console.error(e);
+                          }).finally(() => {setIsLoading(false)})
+                      } }/>
         </Drawer>
     </div>);
 }

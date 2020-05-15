@@ -85,20 +85,22 @@ const getIcon = type => {
 // we can send to a contact, a group, or a phone number
 // we'll get an array of
 
-export const sendMessageFlow = (fb: Firebase, form, contactDico): Promise<any> => {
-    const {recipients, message } = form.getFieldsValue();
-    console.log('will send message from', fb.currentUser!.phoneNumber, message, form.getFieldsValue(), contactDico);
-    return fb.sendSMSMessage(fb.currentUser!.phoneNumber, recipients[0], message)
+export const sendMessageFlow = (fb: Firebase, form: {recipients: string[], message: string, recipientNumbers?: string[]}, contactDico): Promise<any> => {
+    const {recipients, message, recipientNumbers } = form;
+    //FIXME(chab) get rid of that dictionnary
+    const recipientNumber = recipientNumbers ? recipientNumbers[0] : contactDico[recipients[0]].phoneNumber;
+    console.log('will send message from', fb.currentUser!.phoneNumber, message, form, contactDico);
+    return fb.sendSMSMessage(fb.currentUser!.phoneNumber, recipientNumber, message)
         .then(
             (m) => {
                 console.log('sent message succesfully');
                 return fb.addMessageToDb(m.from,
-                    recipients[0],
+                    recipientNumber,
                     message,
                     m.id,
                     m.status,
                     fb!.currentUser!.subAccountId!,
-                    contactDico[recipients[0]]).then(() => {
+                    recipients[0]).then(() => {
                     console.log('sent ms success', m);
                     notification.success({message: 'Message has been sent'});
                     return m;
@@ -112,5 +114,7 @@ export const sendMessageFlow = (fb: Firebase, form, contactDico): Promise<any> =
                 console.log('not sent ms', e);
                 notification.error({message:'Message could not be sent', description: e});
                 return Promise.reject(e);
-            }).then( () => {console.log('success')}, (e) => {console.log('failure', e)})
+            }).then( () => {console.log('success')}, (e) => {console.log('failure', e)
+
+            }).finally(() => { })
 };

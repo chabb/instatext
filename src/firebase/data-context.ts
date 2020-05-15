@@ -41,12 +41,12 @@ export class Data {
                         status: lastMessage.status,
                         direction: lastMessage.direction,
                         message: lastMessage.message,
-                        contactName: q.data().contactName.contact,
+                        contactName: q.data().contactName.contact, //FIXME(chab) naming in db is unfortunate
+                        contactNumber: q.data().contactName.phoneNumber,
                         ts: lastMessage.createdAt})
                 } else {
                     console.warn('empty message');
                 }
-
             });
             this.chats.next(chats);
         })

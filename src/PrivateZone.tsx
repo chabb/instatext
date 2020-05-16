@@ -68,6 +68,12 @@ const _PrivateZone = () => {
                     id: FORM_ID.CONTACT,
                     title:'Add new contact', item: ['2'], modal: () => <NewContact form={form} onFinish={() => setModalVisible(false)}/>};
             }
+            case '/admin': {
+                return {
+                    id: 'admin',
+                    title: 'Add new message', item: ['3'], modal: () => <NewMessage form={form} onFinish={() => setModalVisible(false)}/>
+                };
+            }
             default:
             case '/inbox': {
                 return {
@@ -103,10 +109,10 @@ const _PrivateZone = () => {
                         className='add-message' type="primary" shape="round" icon={<PlusOutlined />}>
                     { currentApp.title }
                 </Button>
-                <Menu
+                <Menu selectable={false}
                     selectedKeys={currentApp.item}
                     theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                    <Menu.Item  key="1">
+                    <Menu.Item key="1">
                         <NavLink to='/inbox'>
                             <UserOutlined />
                             <span className="nav-text">Inbox</span>
@@ -120,7 +126,7 @@ const _PrivateZone = () => {
                     </Menu.Item>
                 </Menu>
             </div>
-            <NavLink to='/admin'>
+            <NavLink className={'admin-route'} to='/admin'>
                 <div className='bottom-nav'>
                     Manage Account
                 </div>

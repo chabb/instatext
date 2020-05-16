@@ -45,10 +45,10 @@ export const columns: ColumnProps<ITMessage>[] = [
         dataIndex: 'status',
         width: '10%',
         render: (value, record: any) =>
-            (<>
+            (<div className='status-icon'>
                 {getMessageStatusIcon(value) }
                 <Badge count={record.pristine}/>
-            </>)
+            </div>)
 
     },
 

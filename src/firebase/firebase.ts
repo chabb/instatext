@@ -8,6 +8,7 @@ import {BehaviorSubject} from "rxjs";
 import {ITContact} from "../contacts/contact-table-definition";
 import {SendMessageResponse} from "../../functions/src";
 import {MessageStatus} from "twilio/lib/rest/api/v2010/account/message";
+const FieldValue = firebase.firestore.FieldValue;
 
 interface User {
     uid: string,
@@ -15,6 +16,7 @@ interface User {
     email: string | null;
     phoneNumber: string;
     subAccountId: string | null;
+    messageCounter: number;
 }
 
 export class Firebase {
@@ -150,8 +152,16 @@ export class Firebase {
         console.log('---');
         const saveMessage = () => Promise.all([
             chat.collection(Collection.MESSAGES).doc(messagesid).set(doc),
-            chat.update({lastMessage: doc})
+            chat.update({lastMessage: doc}),
+            this.db.collection(Collection.USERS)
+                .doc(this.currentUser!.uid)
+                .update({messageCounter: FieldValue.increment(1)})
+                .then(() => { console.log('updated counter')}
+            )
         ]);
+
+
+
 
         return chat.get().then((d) => {
             console.log('Collection exists', d.exists);

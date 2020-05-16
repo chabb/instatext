@@ -41,7 +41,7 @@ export const Admin = () => {
         <a> Manage billing informations </a>
 
         <p><b> Usage: </b></p>
-        Total Message sent:
+        Total Message sent: {fb!.currentUser!.messageCounter}
         <br/>
         Message sent in the current cycle:
 

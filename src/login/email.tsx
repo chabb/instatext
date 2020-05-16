@@ -11,6 +11,8 @@ export const EmailVerification = () => {
     const firebase = useContext(FirebaseContext);
     const history = useHistory();
 
+
+
     useEffect(() => {
         if (!firebase || !firebase.currentUser) {
             history.push('/signup');

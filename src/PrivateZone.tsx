@@ -120,11 +120,11 @@ const _PrivateZone = () => {
                     </Menu.Item>
                 </Menu>
             </div>
-            <Link to='/admin'>
+            <NavLink to='/admin'>
                 <div className='bottom-nav'>
                     Manage Account
                 </div>
-            </Link>
+            </NavLink>
         </Sider>
         <Layout>
             <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />

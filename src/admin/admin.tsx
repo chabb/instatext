@@ -1,11 +1,19 @@
 import React, {useContext} from 'react'
 import FirebaseContext from "../firebase/context";
+import {notification} from "antd";
 
 export const Admin = () => {
 
     const fb = useContext(FirebaseContext)!;
 
-
+    const resetPassword = () => {
+        fb!.doPasswordReset(fb.currentUser!.email).then((s) => {
+            console.log(s);
+            notification.success({message:'A reset email has been sent'});
+        }, (e) => {
+            notification.error(e.message ? e.message : 'FAILED'); //TODO(chab) find a generic message
+        });
+    };
 
     return <div>
         <div style={{marginBottom:20}}>
@@ -16,7 +24,7 @@ export const Admin = () => {
         <div><b> Login Info: </b></div>
         <p>{
             fb.currentUser!.email} <br/>
-            <a> Reset my password </a>
+            <a onClick={e => resetPassword()}> Reset my password </a>
         </p>
 
 

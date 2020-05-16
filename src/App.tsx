@@ -14,6 +14,7 @@ import {SignIn} from "./login/signup";
 import {SignUp} from "./login/signin";
 import {EmailVerification} from "./login/email";
 import {PrivateZone} from "./PrivateZone";
+import {ResetPassword} from "./login/reset";
 
 
 
@@ -39,7 +40,10 @@ const hasSession = (sessionLoaded, firebase) => sessionLoaded || !!firebase!.cur
 function Body() {
 
     const location = useLocation();
-    const isLoginZone = (location.pathname === '/signin' || location.pathname === '/signup' || location.pathname === '/email');
+    const isLoginZone = (location.pathname === '/signin'
+        || location.pathname === '/reset'
+        || location.pathname === '/signup'
+        || location.pathname === '/email');
     const firebase = useContext(FirebaseContext);
     const [sessionLoaded, setSessionLoaded] = useState(false);
     // why-did-i-render
@@ -69,6 +73,9 @@ function Body() {
                         </Route>
                         <Route path='/email'>
                             <EmailVerification/>
+                        </Route>
+                        <Route path='/reset'>
+                            <ResetPassword/>
                         </Route>
                     </Switch>
                 </div>

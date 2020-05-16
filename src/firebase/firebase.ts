@@ -160,9 +160,6 @@ export class Firebase {
             )
         ]);
 
-
-
-
         return chat.get().then((d) => {
             console.log('Collection exists', d.exists);
                 if (d.exists) {
@@ -188,7 +185,7 @@ export class Firebase {
         return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CONTACT);
     };
     getUserChats = () => {
-        return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CHATROOM);
+        return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CHATROOM).orderBy('lastMessage.createdAt', "desc")
     };
     getUserChat = (to) => {
         return this.db.collection(Collection.USERS).doc(this.auth.currentUser!.uid).collection(Collection.CHATROOM)

@@ -32,7 +32,19 @@ export const Admin = () => {
         <p>{fb.currentUser!.phoneNumber}</p>
 
         <p><b> Plan: </b></p>
+        Pro - $20/m
+        <br/>
+        Last charge:
+        <br/>
+        Next charge scheduled:
+
+        <a> Manage billing informations </a>
 
         <p><b> Usage: </b></p>
+        Total Message sent:
+        <br/>
+        Message sent in the current cycle:
+
+        <p>If you have any requests, please don't hesitate to contact us at support@instatext.apps</p>
     </div>
 }

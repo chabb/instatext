@@ -142,7 +142,7 @@ const _PrivateZone = () => {
                         </PrivateRoute>
 
                         <PrivateRoute path="/">
-                            <div> HOME </div>
+                            <Inbox/>
                         </PrivateRoute>
                     </Switch>
                 </div>

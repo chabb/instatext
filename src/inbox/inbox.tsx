@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
-import {Table, Input, Drawer} from "antd";
+import {Table, Input, Drawer, Form} from "antd";
 import {columns, getMessageStatusIcon} from "./message-table-definition";
 import {useChats, useContacts} from "../firebase/hook";
 import {MessageDirection} from "../firebase/data-context";
@@ -9,6 +9,7 @@ import { timeFormat} from 'd3-time-format';
 import './messages.less'
 import {sendMessageFlow} from "../widgets/new_message";
 import FirebaseContext from "../firebase/context";
+import {useForm} from "antd/es/form/util";
 
 const formatTime = timeFormat("%B %d, %Y  %H:%M");
 
@@ -18,6 +19,7 @@ const { Search, TextArea } = Input;
 export const Inbox = () => {
     const fb = useContext(FirebaseContext)!;
     const contacts = useContacts();
+    const form = useRef(null as any) ;
 
     const [isLoading, setIsLoading] = useState(false);
     const [isDrawerVisible, setDrawerVisible] = useState(false);
@@ -112,21 +114,30 @@ export const Inbox = () => {
                         </div>
                 </div>
             )}
-            <TextArea disabled={isLoading}
-                style={{marginTop: 'auto'}}
-                placeholder={isLoading ? 'Sending Message' : 'Write a message'} allowClear
-                      onPressEnter={(e) => {
-                          setIsLoading(true);
-                          const value = (e.target as any).value;
-                          sendMessageFlow(fb, {
-                              recipients:[selectedRow.contactName],
-                              recipientNumbers: [selectedRow.contactNumber],
-                              message:value}, null).then((i) => {
-                                  console.log(i);
-                          }, (e) => {
-                                  console.error(e);
-                          }).finally(() => {setIsLoading(false)})
-                      } }/>
+
+
+            <Form ref={form} name="drawer-message">
+                <Form.Item  label="" name="message">
+                    <TextArea disabled={isLoading}
+                              style={{marginTop: 'auto'}}
+                              placeholder={isLoading ? 'Sending Message' : 'Write a message'} allowClear
+                              onPressEnter={(e) => {
+                                  setIsLoading(true);
+                                  const value = (e.target as any).value;
+                                  console.log(form);
+                                  sendMessageFlow(fb, {
+                                      recipients:[selectedRow.contactName],
+                                      recipientNumbers: [selectedRow.contactNumber],
+                                      message:value}, null).then((i) => {
+                                      console.log(i);
+                                      form.current!.resetFields();
+                                  }, (e) => {
+                                      console.error(e);
+                                  }).finally(() => {setIsLoading(false)})
+                              } }/>
+                </Form.Item>
+            </Form>
+
         </Drawer>
     </div>);
 }

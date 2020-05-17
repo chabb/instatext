@@ -18,8 +18,6 @@ export const Admin = () => {
     const now = new Date();
     const month = now.getUTCMonth();
     const year = now.getUTCFullYear();
-    console.log(month, year);
-
 
     return <div>
         <div style={{marginBottom:20}}>

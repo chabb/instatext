@@ -148,14 +148,15 @@ export class Firebase {
             subAccountId,
             direction: 'outbound'};
 
-
-        console.log('---');
+        const now = new Date();
+        const year = now.getUTCFullYear();
+        const month = now.getUTCMonth();
         const saveMessage = () => Promise.all([
             chat.collection(Collection.MESSAGES).doc(messagesid).set(doc),
             chat.update({lastMessage: doc}),
             this.db.collection(Collection.USERS)
                 .doc(this.currentUser!.uid)
-                .update({messageCounter: FieldValue.increment(1)})
+                .update({messageCounter: FieldValue.increment(1), [`${year}.${month}`]: FieldValue.increment(1)  })
                 .then(() => { console.log('updated counter')}
             )
         ]);

@@ -15,6 +15,12 @@ export const Admin = () => {
         });
     };
 
+    const now = new Date();
+    const month = now.getUTCMonth();
+    const year = now.getUTCFullYear();
+    console.log(month, year);
+
+
     return <div>
         <div style={{marginBottom:20}}>
             <b> Manage my account</b>
@@ -37,13 +43,16 @@ export const Admin = () => {
         Last charge:
         <br/>
         Next charge scheduled:
+        <br/>
 
-        <a> Manage billing informations </a>
+        <p><a> Manage billing informations </a></p>
 
         <p><b> Usage: </b></p>
-        Total Message sent: {fb!.currentUser!.messageCounter}
-        <br/>
-        Message sent in the current cycle:
+        <p>
+            Total Message sent: {fb!.currentUser!.messageCounter}
+            <br/>
+            Message sent in the current cycle:  {fb!.currentUser![year][month]}
+        </p>
 
         <p>If you have any requests, please don't hesitate to contact us at support@instatext.apps</p>
     </div>
